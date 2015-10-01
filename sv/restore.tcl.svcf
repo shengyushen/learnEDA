@@ -1,0 +1,108 @@
+# SimVision Command Script (三  9月 30 21时22分29秒 CST 2015)
+#
+# Version 09.20.s022
+#
+# You can restore this configuration with:
+#
+#      irun -access rwc t1.sv -input restore.tcl
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-SimControl-WatchList {
+  usual
+  hide set_break
+  hide vplan
+}
+preferences set toolbar-SimControl-SrcBrowser {
+  usual
+  hide vplan
+}
+preferences set toolbar-SimControl-WaveWindow {
+  usual
+  hide vplan
+}
+preferences set toolbar-OperatingMode-WaveWindow {
+  usual
+  position -pos 4
+  name OperatingMode
+}
+
+#
+# Simulator
+#
+database require simulator -hints {
+	simulator "irun -gui -access rwc t1.sv -input restore.tcl"
+}
+
+#
+# Cursors
+#
+set time 1010ns
+if {[catch {cursor new -name  TimeA -time $time}] != ""} {
+    cursor set -using TimeA -time $time
+}
+cursor set -using TimeA -marching 1
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {
+{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}
+}
+mmap new -reuse -name {Example Map} -radix %x -contents {
+{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}
+}
+
+#
+# Design Browser windows
+#
+if {[catch {window new browser -name "Design Browser 1" -geometry 700x500+0+24}] != ""} {
+    window geometry "Design Browser 1" 700x500+0+24
+}
+window target "Design Browser 1" on
+browser using "Design Browser 1"
+browser set -scope [subst -nobackslashes -nocommands simulator::t1 ]
+browser yview see [subst -nobackslashes -nocommands simulator::t1 ]
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1010x600+408+111}] != ""} {
+    window geometry "Waveform 1" 1010x600+408+111
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+cursor set -using TimeA -time 1010ns
+cursor set -using TimeA -marching 1
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst -nobackslashes -nocommands {
+	simulator::t1.clk
+} ]]
+
+waveform xview limits 0 1010ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 700x250+0+553
