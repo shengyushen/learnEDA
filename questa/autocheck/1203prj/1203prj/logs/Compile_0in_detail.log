@@ -1,0 +1,485 @@
+# 0-In:
+# 
+# Questa Functional Verification System
+# Version 10.0a linux_x86_64 16 Mar 2011
+# 
+# Copyright 1995-2011 Mentor Graphics Corporation.
+# All Rights Reserved.
+# 
+# THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION 
+# WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# 
+
+0in log created Mon Jun  8 17:35:39 2015 by syshen on localhost
+
+
+0in
+
+Command arguments:
+    -d pcs8x
+    -work work
+    -libmap work=work
+    -effort med
+
+
+## Generating Internal Simulator Arguments File...
+
+## Compiling Design...
+Reading internal mapping file for library mapping
+Reading MTI mapping for library mapping
+Writing all MTI mappings to vmap output ...
+
+
+Parsing files...
+
+## Elaborating Design...
+Writing all MTI mappings to vmap output ...
+
+
+
+
+Top level modules:
+	pcs8x
+
+Analyzing design...
+-- Loading module z0in_work.pcs8x
+-- Loading module z0in_work.sync_sender
+-- Loading module z0in_work.tx_swizzler
+-- Loading module z0in_work.distributor
+-- Loading module z0in_work.pcs1x
+-- Loading module z0in_work.tx_fifo_2x
+-- Loading module z0in_work.graycounter_12
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+-- Loading module z0in_work.graydecoder_12
+-- Loading module z0in_work.graycounter_6
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+-- Loading module z0in_work.graydecoder_6
+-- Loading module z0in_work.step_counter_2533
+-- Loading module z0in_work.scrambler_26
+-- Loading module z0in_work.tx_gearbox
+-- Loading module z0in_work.rx_block_sync
+-- Loading module z0in_work.XFIPCS_LOCK_FSM
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+-- Loading module z0in_work.inplace_dec6466_26
+-- Loading module z0in_work.rx_fifo_2x
+-- Loading module z0in_work.graycounter_8_long
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+-- Loading module z0in_work.graydecoder_8_long
+-- Loading module z0in_work.graycounter_16_long
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+-- Loading module z0in_work.graydecoder_16_long
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(141): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v(228): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/pcs1x.v(193): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(487): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+Warning : Vopt warning.  /h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v(592): (vopt-2672) Module 'sync_2xdff' is not defined.  [parser-285]
+        : Elaboration will continue.
+-- Loading module z0in_work.collector
+-- Loading module z0in_work.rx_stage
+-- Loading module z0in_work.rx_swizzler
+Optimizing 24 design-units (inlining 0 instances):
+-- Optimizing module z0in_work.sync_sender(fast)
+-- Optimizing module z0in_work.tx_swizzler(fast)
+-- Optimizing module z0in_work.distributor(fast)
+-- Optimizing module z0in_work.graycounter_12(fast)
+-- Optimizing module z0in_work.graydecoder_12(fast)
+-- Optimizing module z0in_work.graycounter_6(fast)
+-- Optimizing module z0in_work.graydecoder_6(fast)
+-- Optimizing module z0in_work.step_counter_2533(fast)
+-- Optimizing module z0in_work.tx_fifo_2x(fast)
+Warning : Unresolved module.  Instance 'inst_wrpointer_gray_sync1', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v', Line 141.  [parser-47]
+        : Parsing will continue.
+Warning : Unresolved module.  Instance 'inst_rdpointer_gray_sync1', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/tx_fifo_2x.v', Line 228.  [parser-47]
+        : Parsing will continue.
+-- Optimizing module z0in_work.scrambler_26(fast)
+-- Optimizing module z0in_work.tx_gearbox(fast)
+-- Optimizing module z0in_work.XFIPCS_LOCK_FSM(fast)
+-- Optimizing module z0in_work.rx_block_sync(fast)
+-- Optimizing module z0in_work.inplace_dec6466_26(fast)
+-- Optimizing module z0in_work.graycounter_8_long(fast)
+-- Optimizing module z0in_work.graydecoder_8_long(fast)
+-- Optimizing module z0in_work.graycounter_16_long(fast)
+-- Optimizing module z0in_work.graydecoder_16_long(fast)
+-- Optimizing module z0in_work.rx_fifo_2x(fast)
+Warning : Unresolved module.  Instance 'inst_wrpointer_gray_sync1', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v', Line 487.  [parser-47]
+        : Parsing will continue.
+Warning : Unresolved module.  Instance 'inst_rdpointer_gray_sync1', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/rx_fifo_2x.v', Line 592.  [parser-47]
+        : Parsing will continue.
+-- Optimizing module z0in_work.pcs1x(fast)
+Warning : Unresolved module.  Instance 'inst_out_block_lock_core', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/pcs1x.v', Line 193.  [parser-47]
+        : Parsing will continue.
+-- Optimizing module z0in_work.collector(fast)
+-- Optimizing module z0in_work.rx_stage(fast)
+-- Optimizing module z0in_work.rx_swizzler(fast)
+-- Optimizing module z0in_work.pcs8x(fast)
+Optimized design name is zi_opt_af0_1652059059_1
+
+
+## Synthesizing Checkers...
+Writing all MTI mappings to vmap output ...
+
+
+Parsing files...
+
+Warning : Unresolved module.  Instance 'inst_out_block_lock_core', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/pcs1x.v', Line 193.  [parser-47]
+        : Parsing will continue.
+Analyzing design and synthesizing checkers...
+Processed 10 modules.
+Processed 20 modules.
+Processed 24 modules.
+
+Writing checker files.
+
+
+## Processing Formal Logic...
+Writing all MTI mappings to vmap output ...
+
+
+Parsing files ...
+
+Warning : Unresolved module.  Instance 'inst_out_block_lock_core', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/pcs1x.v', Line 193.  [parser-47]
+        : Parsing will continue.
+Parsing checker control files.
+Info    : Parsing file '/home/syshen/0in_cache/AUTOCHECK/CHX/0in_mem_ctrl.v'.
+Processing module 'sync_sender'
+Info    : Elaborating module 'sync_sender'.
+Info    : Flattening design 'sync_sender'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'tx_swizzler'
+Info    : Elaborating module 'tx_swizzler'.
+Info    : Flattening design 'tx_swizzler'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'distributor'
+Info    : Elaborating module 'distributor'.
+Info    : Flattening design 'distributor'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Info    : FSM_UNREACHABLE_STATE:  FSM 'state', Module 'distributor', State 'STATE_WAIT4IDLE'.
+Info    : FSM_UNREACHABLE_STATE:  FSM 'state', Module 'distributor', State 'STATE_SENDBLOCKLOCK'.
+Processing module 'graycounter_12'
+Info    : Elaborating module 'graycounter_12'.
+Info    : Flattening design 'graycounter_12'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'graydecoder_12'
+Info    : Elaborating module 'graydecoder_12'.
+Info    : Flattening design 'graydecoder_12'.
+Processing module 'graycounter_6'
+Info    : Elaborating module 'graycounter_6'.
+Info    : Flattening design 'graycounter_6'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'graydecoder_6'
+Info    : Elaborating module 'graydecoder_6'.
+Info    : Flattening design 'graydecoder_6'.
+Processing module 'step_counter_2533'
+Info    : Elaborating module 'step_counter_2533'.
+Info    : Flattening design 'step_counter_2533'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'tx_fifo_2x'
+Info    : Elaborating module 'tx_fifo_2x'.
+Info    : Flattening design 'tx_fifo_2x'.
+Info    : Detected synchronous reset 'reset_n_wr' (active low).
+Info    : Detected synchronous reset 'reset_n_rd' (active low).
+Processing module 'scrambler_26'
+Info    : Elaborating module 'scrambler_26'.
+Info    : Flattening design 'scrambler_26'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'tx_gearbox'
+Info    : Elaborating module 'tx_gearbox'.
+Info    : Flattening design 'tx_gearbox'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'XFIPCS_LOCK_FSM'
+Info    : Elaborating module 'XFIPCS_LOCK_FSM'.
+Info    : Flattening design 'XFIPCS_LOCK_FSM'.
+Processing module 'rx_block_sync'
+Info    : Elaborating module 'rx_block_sync'.
+Info    : Flattening design 'rx_block_sync'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Info    : FSM_UNREACHABLE_TRANS:  FSM 'state', Module 'rx_block_sync', Transition from 'STATE_32' to 'STATE_10'.
+Processing module 'inplace_dec6466_26'
+Info    : Elaborating module 'inplace_dec6466_26'.
+Info    : Flattening design 'inplace_dec6466_26'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'graycounter_8_long'
+Info    : Elaborating module 'graycounter_8_long'.
+Info    : Flattening design 'graycounter_8_long'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'graydecoder_8_long'
+Info    : Elaborating module 'graydecoder_8_long'.
+Info    : Flattening design 'graydecoder_8_long'.
+Processing module 'graycounter_16_long'
+Info    : Elaborating module 'graycounter_16_long'.
+Info    : Flattening design 'graycounter_16_long'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'graydecoder_16_long'
+Info    : Elaborating module 'graydecoder_16_long'.
+Info    : Flattening design 'graydecoder_16_long'.
+Processing module 'rx_fifo_2x'
+Info    : Elaborating module 'rx_fifo_2x'.
+Info    : Flattening design 'rx_fifo_2x'.
+Info    : Detected synchronous reset 'reset_n_wr' (active low).
+Info    : Detected synchronous reset 'reset_n_rd' (active low).
+Processing module 'pcs1x'
+Info    : Elaborating module 'pcs1x'.
+Warning : Unresolved module.  Instance 'inst_out_block_lock_core', Module 'sync_2xdff', File '/h8_nc/nc_source/pxfi/src/common/pcs1x.v', Line 193.  [parser-47]
+        : Parsing will continue.
+Info    : Flattening design 'pcs1x'.
+Info    : Detected synchronous reset 'reset_n_core' (active low).
+Processing module 'collector'
+Info    : Elaborating module 'collector'.
+Info    : Flattening design 'collector'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'rx_stage'
+Info    : Elaborating module 'rx_stage'.
+Info    : Flattening design 'rx_stage'.
+Processing module 'rx_swizzler'
+Info    : Elaborating module 'rx_swizzler'.
+Info    : Flattening design 'rx_swizzler'.
+Info    : Detected synchronous reset 'reset_n' (active low).
+Processing module 'pcs8x'
+Info    : Elaborating module 'pcs8x'.
+Info    : Flattening design 'pcs8x'.
+Info    : Flattening design 'pcs8x'.
+Info    : Parsing file '/home/syshen/0in_cache/AUTOCHECK/CHX/zi_cw_files_pcs8x.vf'.
+
+Parsing Verilog checkerware files ..
+-- Compiling module zi_cm_pcs8x
+
+Top level modules:
+	zi_cm_pcs8x
+
+
+Top level modules:
+	zi_cm_pcs8x
+
+Analyzing design...
+-- Loading module z0in_work.zi_cm_pcs8x
+Optimizing 1 design-unit (inlining 0 instances):
+-- Optimizing module z0in_work.zi_cm_pcs8x(fast)
+Optimized design name is zi_opt_csl_1652059059_3
+
+Info    : Elaborating module 'zi_mem_ctrl'.
+Info    : Flattening design 'zi_mem_ctrl'.
+Info    : Elaborating module 'zi_cm_pcs8x'.
+Info    : Flattening design 'zi_cm_pcs8x'.
+Info    : Detected synchronous reset 'reset_n_core' (active low).
+Info    : Detected synchronous reset 'reset_n_tx0' (active low).
+Info    : Detected synchronous reset 'reset_n_rx0' (active low).
+Info    : Detected synchronous reset 'reset_n_tx1' (active low).
+Info    : Detected synchronous reset 'reset_n_rx1' (active low).
+Info    : Detected synchronous reset 'reset_n_tx2' (active low).
+Info    : Detected synchronous reset 'reset_n_rx2' (active low).
+Info    : Detected synchronous reset 'reset_n_tx3' (active low).
+Info    : Detected synchronous reset 'reset_n_rx3' (active low).
+Info    : Detected synchronous reset 'reset_n_tx4' (active low).
+Info    : Detected synchronous reset 'reset_n_rx4' (active low).
+Info    : Detected synchronous reset 'reset_n_tx5' (active low).
+Info    : Detected synchronous reset 'reset_n_rx5' (active low).
+Info    : Detected synchronous reset 'reset_n_tx6' (active low).
+Info    : Detected synchronous reset 'reset_n_rx6' (active low).
+Info    : Detected synchronous reset 'reset_n_tx7' (active low).
+Info    : Detected synchronous reset 'reset_n_rx7' (active low).
+Info    : Detected posedge clock 'clkcore'.
+Info    : Detected posedge clock 'clkpma_tx0'.
+Info    : Detected posedge clock 'clkpma_rx0'.
+Info    : Detected posedge clock 'clkpma_tx1'.
+Info    : Detected posedge clock 'clkpma_rx1'.
+Info    : Detected posedge clock 'clkpma_tx2'.
+Info    : Detected posedge clock 'clkpma_rx2'.
+Info    : Detected posedge clock 'clkpma_tx3'.
+Info    : Detected posedge clock 'clkpma_rx3'.
+Info    : Detected posedge clock 'clkpma_tx4'.
+Info    : Detected posedge clock 'clkpma_rx4'.
+Info    : Detected posedge clock 'clkpma_tx5'.
+Info    : Detected posedge clock 'clkpma_rx5'.
+Info    : Detected posedge clock 'clkpma_tx6'.
+Info    : Detected posedge clock 'clkpma_rx6'.
+Info    : Detected posedge clock 'clkpma_tx7'.
+Info    : Detected posedge clock 'clkpma_rx7'.
+Info    : Design is processed for formal verification.  Design 'pcs8x'.
+
+Clocks
+------------------------------------------------------------------------------
+Port                                   Period        Waveform     Edges
+------------------------------------------------------------------------------
+clkcore                  [inferred]       ?            { ? ? }    PE   
+clkpma_tx0               [inferred]       ?            { ? ? }    PE   
+clkpma_rx0               [inferred]       ?            { ? ? }    PE   
+clkpma_tx1               [inferred]       ?            { ? ? }    PE   
+clkpma_rx1               [inferred]       ?            { ? ? }    PE   
+clkpma_tx2               [inferred]       ?            { ? ? }    PE   
+clkpma_rx2               [inferred]       ?            { ? ? }    PE   
+clkpma_tx3               [inferred]       ?            { ? ? }    PE   
+clkpma_rx3               [inferred]       ?            { ? ? }    PE   
+clkpma_tx4               [inferred]       ?            { ? ? }    PE   
+clkpma_rx4               [inferred]       ?            { ? ? }    PE   
+clkpma_tx5               [inferred]       ?            { ? ? }    PE   
+clkpma_rx5               [inferred]       ?            { ? ? }    PE   
+clkpma_tx6               [inferred]       ?            { ? ? }    PE   
+clkpma_rx6               [inferred]       ?            { ? ? }    PE   
+clkpma_tx7               [inferred]       ?            { ? ? }    PE   
+clkpma_rx7               [inferred]       ?            { ? ? }    PE   
+------------------------------------------------------------------------------
+// 0in set_clock clkcore -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx0 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx0 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx1 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx1 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx2 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx2 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx3 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx3 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx4 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx4 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx5 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx5 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx6 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx6 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_tx7 -period ? -waveform { ? ? }
+// 0in set_clock clkpma_rx7 -period ? -waveform { ? ? }
+------------------------------------------------------------------------------
+
+Port Constraints
+-------------------------------------------------------------------------------
+Type                 Clock Domain         Value         Port
+-------------------------------------------------------------------------------
+Clock                <none>               -            'clkcore'
+Clock                <none>               -            'clkpma_rx0'
+Clock                <none>               -            'clkpma_rx1'
+Clock                <none>               -            'clkpma_rx2'
+Clock                <none>               -            'clkpma_rx3'
+Clock                <none>               -            'clkpma_rx4'
+Clock                <none>               -            'clkpma_rx5'
+Clock                <none>               -            'clkpma_rx6'
+Clock                <none>               -            'clkpma_rx7'
+Clock                <none>               -            'clkpma_tx0'
+Clock                <none>               -            'clkpma_tx1'
+Clock                <none>               -            'clkpma_tx2'
+Clock                <none>               -            'clkpma_tx3'
+Clock                <none>               -            'clkpma_tx4'
+Clock                <none>               -            'clkpma_tx5'
+Clock                <none>               -            'clkpma_tx6'
+Clock                <none>               -            'clkpma_tx7'
+Unconstrained        <none>               -            'llp_phy_data'
+Unconstrained        <none>               -            'llp_phy_data_valid'
+Constraint           <none>               1'b1         'reset_n_core'
+Constraint           <none>               1'b1         'reset_n_rx0'
+Constraint           <none>               1'b1         'reset_n_rx1'
+Constraint           <none>               1'b1         'reset_n_rx2'
+Constraint           <none>               1'b1         'reset_n_rx3'
+Constraint           <none>               1'b1         'reset_n_rx4'
+Constraint           <none>               1'b1         'reset_n_rx5'
+Constraint           <none>               1'b1         'reset_n_rx6'
+Constraint           <none>               1'b1         'reset_n_rx7'
+Constraint           <none>               1'b1         'reset_n_tx0'
+Constraint           <none>               1'b1         'reset_n_tx1'
+Constraint           <none>               1'b1         'reset_n_tx2'
+Constraint           <none>               1'b1         'reset_n_tx3'
+Constraint           <none>               1'b1         'reset_n_tx4'
+Constraint           <none>               1'b1         'reset_n_tx5'
+Constraint           <none>               1'b1         'reset_n_tx6'
+Constraint           <none>               1'b1         'reset_n_tx7'
+Unconstrained        <none>               -            'rx_reversed'
+Unconstrained        <none>               -            'rxdata0'
+Unconstrained        <none>               -            'rxdata1'
+Unconstrained        <none>               -            'rxdata2'
+Unconstrained        <none>               -            'rxdata3'
+Unconstrained        <none>               -            'rxdata4'
+Unconstrained        <none>               -            'rxdata5'
+Unconstrained        <none>               -            'rxdata6'
+Unconstrained        <none>               -            'rxdata7'
+-------------------------------------------------------------------------------
+
+Info    : Design is linked for formal analysis.  Design 'pcs8x'.
+## Generating Files for AutoCheck...
+Info    : Formal model has been created.  Formal model contains 30231 operators.
+
+====================================
+AutoCheck Netlist Complexity: 330302
+====================================
+Generating checker report...
+
+See '/home/syshen/0in_checker.rpt' for detailed checker report.
+
+
+## Creating Formal Model...
+
+Error/Warning Summary (Look in /home/syshen/0in_detail.log for more information)
+-----------------------------------------------------------
+Count  Type     Message ID         Summary
+-----------------------------------------------------------
+   40  Warning  parser-285         Vopt warning.
+    8  Warning  parser-47          Unresolved module.
+
+Final Process Statistics: Max memory 1089MB, CPU time 18s, Total time 26s
+End 0in log Mon Jun  8 17:36:05 2015
+
+

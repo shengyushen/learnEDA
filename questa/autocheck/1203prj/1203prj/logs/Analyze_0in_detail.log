@@ -1,0 +1,61 @@
+# 0-In:
+# 
+# Questa Functional Verification System
+# Version 10.0a linux_x86_64 16 Mar 2011
+# 
+# Copyright 1995-2011 Mentor Graphics Corporation.
+# All Rights Reserved.
+# 
+# THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION 
+# WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# 
+
+0in log created Mon Jun  8 17:35:38 2015 by syshen on localhost
+
+
+0in
+
+
+## Compiling Design...
+Reading internal mapping file for library mapping
+Reading MTI mapping for library mapping
+Writing all MTI mappings to vmap output ...
+
+
+Parsing files...
+-- Compiling module graydecoder_6
+-- Compiling module graydecoder_12
+-- Compiling module graydecoder_8_long
+-- Compiling module graydecoder_16_long
+-- Compiling module graycounter_6
+-- Compiling module graycounter_12
+-- Compiling module graycounter_8_long
+-- Compiling module graycounter_16_long
+-- Compiling module step_counter_2533
+-- Compiling module tx_fifo_2x
+-- Compiling module scrambler_26
+-- Compiling module tx_gearbox
+-- Compiling module XFIPCS_LOCK_FSM
+-- Compiling module rx_block_sync
+-- Compiling module inplace_dec6466_26
+-- Compiling module rx_fifo_2x
+-- Compiling module pcs1x
+-- Compiling module distributor
+-- Compiling module sync_sender
+-- Compiling module collector
+-- Compiling module rx_swizzler
+-- Compiling module rx_stage
+-- Compiling module tx_swizzler
+-- Compiling module pcs8x
+
+Referenced (but uncompiled) modules or primitives:
+	sync_2xdff
+
+Top level modules:
+	pcs8x
+
+Final Process Statistics: Max memory 1088MB, CPU time 1s, Total time 1s
+End 0in log Mon Jun  8 17:35:39 2015
+
+

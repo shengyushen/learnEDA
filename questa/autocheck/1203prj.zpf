@@ -1,0 +1,48 @@
+[Project]
+Project_Files_Count = 1
+Project_File_0 = /home/syshen/h8_nc/nc_source/pxfi/pxfi_manifest.v
+Project_File_P_0 = file_type verilog group_id 0 folder {Top Level} last_compile 0 compile_status 1 invalid 0 ood 1 compile_to work file_path /home/syshen/h8_nc/nc_source/pxfi/pxfi_manifest.v compile_order 1 dont_compile 0 compile_time 1433756139
+Project_Folder_Count = 1
+
+RTLD_Directives 
+
+[0inLibrary]
+
+[0inCompile]
+workingDir = /home/syshen
+outputDir = /home/syshen
+ovl = 0
+qvl = 0
+vhdlSyntax = 93
+psl = 0
+shown = 1
+verilogSyntax = v2k
+topModule = pcs8x
+sva = 0
+generics = {}
+
+[0inLink]
+compileTime = 1433756166
+dirty = 0
+auto_formal = 1
+rcd = 1
+
+[0inDB]
+
+[0inFormal]
+runProve = 0
+importInitFromFile = 0
+dirty = 0
+confirmEffort = med
+formalEffort = {Quick Proof and Violation Detection}
+minDepth = 1
+numClkCyc = 5
+defInitMem = X
+proveEffort = med
+runConfirm = 0
+maxDepth = 100
+useAdvanced = 0
+active_rst = High
+defInitVal = X
+cslInitFile = 1
+sanityWaveform = 0

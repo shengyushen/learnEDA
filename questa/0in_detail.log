@@ -1,0 +1,25 @@
+# 0-In:
+# 
+# Questa Functional Verification System
+# Version 10.0a linux_x86_64 16 Mar 2011
+# 
+# Copyright 1995-2011 Mentor Graphics Corporation.
+# All Rights Reserved.
+# 
+# THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION 
+# WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# 
+
+0in log created Mon Jun  8 09:58:55 2015 by syshen on syshen-ThinkPad-X201
+
+
+0in
+
+Command: quit
+Command arguments:
+
+Final Process Statistics: Max memory 1095MB, CPU time 0s, Total time 2s
+End 0in log Mon Jun  8 09:58:57 2015
+
+
