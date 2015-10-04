@@ -226,16 +226,106 @@ module t1 ;
 	end
 
 	class R1 ;
+		//rand can have overlapped value in range
 		rand int i1;
-		constraint c1 {i1>0 && i1<10;}
+		//while randc enumerate each permutation  without overlapp
+		randc int ic1;
+		rand int a;
+
+		constraint c1 {i1>0 && i1<3;}
+		constraint cc1 {ic1>0 && ic1<10;}
+		//constrain with precondition
+		constraint c2 {
+		(i1==1) -> {a inside {3,4,[5:10]};}
+		(i1==2) -> {a inside {30,40,[50:100]};}
+		}
+
+		//constraint with wait on range and value,
+		//here weight is for each element of range
+		rand int b;
+		constraint c3 {b dist {100:=1,[101:109]:=1,110:=2};}
+		rand int c;
+		//wait for thw whole range
+		constraint c4 {c dist {100:=1,[101:109]:/1,110:=2};}
+
+		//if else constraint
+		rand int d;
+		constraint d4 {if(c==100) d<100; else (d>100 && d<200);}
+
+		//giving order od chosing value
+		rand bit e1;
+		rand bit [7:0] e2;
+		//with thsi con1, it is almost impossible for e2==1 to hold, so e1 will almost be 0 all the time
+		constraint con1 {e1->(e2==1);}
+		// but with this , we can first determine e1 to be 0 and 1 equally posible
+		constraint con2 {solve e1 before e2;}
 	endclass : R1
 
 	R1 r1= new;
 	initial begin
-		for(int i=0;i<=5;i++) begin
+		for(int i=0;i<=20;i++) begin	
+			//randomize(null) just check for satisfiability, not really run
+			//can add "with {class_property < limit;}" struct after randomize to constrain value 
+			//r1.rand_mode(1/0) to active/deactive all variables in r1
+			//r1.e1.rand_mode(1/0) to active/deactive variable e1
+			//similarly, we can use randomize_mode for constrains instead of variables
+			//specifying which variables to be randomize with randomize(e1)
 			assert(r1.randomize());
-			$display("ran i %d res %d",i , r1.i1);
+			$display("ran i %d i1 %d ic1 %d a %d b %d",i , r1.i1,r1.ic1, r1.a,r1.b);
 		end
+	end
+
+	initial begin
+		for(int i=0;i<=20;i++) begin
+			assert(r1.randomize());
+			$display("e1 %d e2 %d",r1.e1,r1.e2);
+		end
+	end
+
+	int f1;
+	initial begin
+		int value;
+		integer v2;
+		//globally randomize and inline constraint
+		void'(std::randomize(f1) with {f1>0;});
+		for(int i=0;i<10;i++) begin
+			//urandom function that return unsign and thread stable
+			value = $urandom(222);
+			v2    = $urandom_range (30,1); // besure that larger one come first
+			$display("urandom res %D urandom_range res %D",value, v2);
+		end
+	end
+
+	int g1 ;
+	initial begin
+		//randomely generate value with weight
+		randcase 
+		2: g1 = 1;
+		3: g1 = 2;
+		5: g1 = 5;
+		endcase
+		$display("randcase res %d",g1);
+		randsequence (test) 
+			test: one two three four done;
+			one : if(g1==1) up else down;
+			two : smile |frown;
+			three : 
+				case (g1)
+				1: t1;
+				2: t2;
+				default : t3;
+				endcase;
+			four : repeat (10) t4;
+			done : {$display("done");};
+			up   : {$display("up")  ;};
+			down : {$display("down");};
+			smile: {$display("smile");};
+			frown: {$display("frown");};
+			t1: {$display("t1");};
+			t2: {$display("t2");};
+			t3: {$display("t3");};
+			t4: {$display("t4");};
+		endsequence
 	end
 
 
