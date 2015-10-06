@@ -28,23 +28,29 @@ initial begin
 	#22 reset_n = 1'b1;
 end
 
+reg rand_req;
 always @(posedge clk)
 begin
-	if(idle) begin
-		request <= $random %2;
-	end
-	else begin
-		request <= 1'b0;
-	end
+	randcase
+	1: rand_req <= 1'b1;
+	1: rand_req <= 1'b0;
+	endcase
 end
+
+always_comb 
+begin
+	if(idle ) request = rand_req;
+	else request = 1'b0;
+end
+
 
 always @(request) 
 begin
 	$display ("request %d at %d",request,$stime);
 end
 
-always @(posedge clk) begin
-	$display("idle %d at %d",idle,$stime);
-end
+//always @(posedge clk) begin
+//	$display("idle %d at %d",idle,$stime);
+//end
 
 endmodule 
