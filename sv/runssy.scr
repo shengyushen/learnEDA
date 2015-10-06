@@ -1,0 +1,1 @@
+irun tbssy.sv ssy.v -access rwc -gui -input ssy.tcl

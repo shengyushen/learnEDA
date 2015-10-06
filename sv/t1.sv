@@ -9,13 +9,19 @@ package types;
 	endclass :C
 endpackage: types
 
-module t1 ;
+//port declaration is <direction> + <kind> + <type> +<name>
+module t1 (input var int i1,
+input  int i2,
+output o1);
+	//localparam can not be customized on instantiation
+	localparam ll=1;
 	import types::*;
 
 	class B extends C #(.m(3));
 		function print() ;
 		begin
-			$display("mc %d md %d",mc,md);
+			//%m can print hierachy
+			$display("%m.mc %d md %d",mc,md);
 		end
 		endfunction
 	endclass :B
@@ -176,7 +182,6 @@ module t1 ;
 		clk = 0;
 		forever begin
 			#10ns clk = !clk;
-			#100ms clk = !clk;
 		end
 	
 	end
@@ -327,6 +332,108 @@ module t1 ;
 			t4: {$display("t4");};
 		endsequence
 	end
+		
+	int va,vb,vc,vd;
+	int ve,vf;
+	always @(posedge clk) begin
+		$display("posedge of clk at $d",$stime);
+	end
 
+	initial begin
+		va=0;
+		#9 va=1;
+		#20 va =2;
+	end
+	//notice the difference of va and ssybus.va
+	//va get value 1 at 9, after the -2ns of the posedge 10ns
+	//so 1 will not be caputured by ssybus.va
+	//it will only be caputured at the next posedge at 30ns
+	always @(va) begin
+		$display("va is %d at %d",va,$stime);
+	end
+	always @(ssybus.va) begin
+		$display("ssybus.va is %d at %d",ssybus.va,$stime);
+	end
+	//with clk as default clock
+	default clocking ssybus @(posedge clk);
+		//with sampling input 1ns before posedge clk
+		// and driving output 1ns after posedge clk
+		//of course, without specification the default is 1step for input and 0 for output
+		default input #2ns output #2ns;
+		//I can also move the posedge above here
+		//default input posedge
+		input va;
+		output vb;
+		//override c to use 1 delta step before posedge clk
+		input #1step vc;
+		//override to use negedge clk on output d
+		output negedge vd;
+		output vf;
+	endclocking
+
+	initial begin
+		//output of cb can only be driven by <=
+		ssybus.vb <=0;
+		//even if we set it to 1 at 11, it will appear at ssybus.vb at 2ns after next posedge at 30
+		//the same is for vb
+		#11 ssybus.vb <= 1;
+		#20 ssybus.vb <= 2;
+	end
+
+	always @(vb) begin
+		$display("vb is %d at %d",vb,$stime);
+	end
+
+	always @(ssybus.vb) begin
+		$display("ssybus.vb is %d at %d",ssybus.vb,$stime);
+	end
+	
+	initial begin
+		ve =0;
+		ssybus.vf<=0;
+		$display("current time is %d",$stime);
+		## 2;
+		$display("after 2 cycles time is %d",$stime);
+		ve=1;
+		ssybus.vf <= ##2 ve;
+		$display("before 2 cycle ve %d vf %d",ve,ssybus.vf);
+		##3
+		$display("after 2 cycle ve %d vf %d",ve,ssybus.vf);
+
+
+	end
 
 endmodule : t1
+
+program testprogram;
+	initial begin
+		//$exit can only be used in program
+		$display("exiting program");
+		$exit();
+	end
+endprogram : testprogram
+
+//an interface can have different direction in different place
+//such as the slave and master case
+interface simple_bus;
+	logic req,gnt;
+	modport master (output req,input gnt);
+	modport slave (input req,output gnt);
+endinterface :simple_bus
+
+module slavemod(simple_bus sb);
+endmodule : slavemod
+
+//determining dir in definition
+module mastermod(simple_bus.master sb);
+endmodule : mastermod
+
+
+module topmod ; 
+simple_bus  sb();
+
+//determining dir with instnace
+slavemod sm(.sb(sb.slave));
+mastermod mm(.sb(sb));
+
+endmodule : topmod
