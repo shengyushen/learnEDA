@@ -23,8 +23,7 @@ initial begin
 end
 
 initial begin
-	reset_n = 1'b1;
-	#22 reset_n = 1'b0;
+	reset_n = 1'b0;
 	#22 reset_n = 1'b1;
 end
 
@@ -44,10 +43,10 @@ begin
 end
 
 
-always @(request) 
-begin
-	$display ("request %d at %d",request,$stime);
-end
+//always @(request) 
+//begin
+//	$display ("request %d at %d",request,$stime);
+//end
 
 //always @(posedge clk) begin
 //	$display("idle %d at %d",idle,$stime);
