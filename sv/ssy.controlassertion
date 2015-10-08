@@ -1,0 +1,5 @@
+# these scripts doing redundent work to demenstrate various posibilities
+assertion -off *
+assertion -on tbssy.*
+assertion -off tbssy.instssy.shifting
+assertion -on -directive assert tbssy.*
