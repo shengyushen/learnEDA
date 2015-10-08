@@ -1,0 +1,15 @@
+// vunit for module
+vunit ssy_mod (ssy) 
+{
+	default clock = posedge clk;
+	requet2granted1 : assert always request -> eventually! granted;
+	// the following will fail and confirm that this vunit functions  correctly
+	//requet2granted2 : assert always request -> next granted;
+}
+
+//vunit for instance
+vunit ssy_inst (tbssy.instssy) 
+{
+	default clock = posedge clk;
+	requet2state01 : assert always request -> next (state==STATE01) ;
+}

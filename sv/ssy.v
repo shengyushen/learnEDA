@@ -12,13 +12,22 @@ localparam STATE11=2'b11;
 reg  [1:0] state;
 reg  [1:0] next_state;
 
+reg  [3:0] shiftreg;
+reg  [3:0] next_shiftreg;
+
 always @(posedge clk) begin
 	if(!reset_n) begin
 		state <= STATE00;
+		shiftreg <= 4'b0001;
 	end 
 	else begin
 		state <= next_state;
+		shiftreg <=  next_shiftreg;
 	end
+end
+
+always @(*) begin
+	next_shiftreg = {shiftreg[2:0],shiftreg[3]};
 end
 
 always @(*) 
@@ -132,7 +141,32 @@ assign idle = (state== STATE00);
 // psl request2granted2_rose_next_exist:  assert always (rose(request) -> next_e [1:3] (state==STATE10)) ;
 
 // operator eventually
-// psl eventually_op :  assert always (request -> eventually! granted) ;
+// psl property eventually_op = always (request -> eventually! granted) ;
+// psl assert eventually_op;
+
+// operator abort it will not be checked
+// psl abort_op_STATE10 : assert always (request -> next ((eventually! granted) abort (state==STATE10)) );
+
+// operator forall
+// psl property shifting = forall i in {0:3} : always (shiftreg[i]-> next !shiftreg[i]);
+// psl assert shifting;
+
+// directive assume 
+// they are treated as assert in simulation
+// and as assumption in formal
+// psl assume_op : assume always (idle -> eventually! request) report "no request following idle" severity error;
+// report and severity
+// fail will stop simulation immediatelly
+// other possible severity are note warning error failure
+// fake psl assume_op2 : assume always (idle -> next request) report "no request following idle" severity failure;
+
+// directive restric, similar to assume but with a sequence instead of a property
+// psl restrict_op : restrict  {!reset_n[+];reset_n[+]};
+
+// different on assume and restrict with an open end sequence
+// psl assume {!reset_n[+];reset_n[+]};
+// assume will finish when the reset_n rise
+// but restrict will continue to the end of simulation, because it care a seqence while assume care a property
 
 endmodule
 
