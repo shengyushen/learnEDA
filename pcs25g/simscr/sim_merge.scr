@@ -1,0 +1,14 @@
+#!/bin/sh
+source ~/scr/cds_setting.scr
+source ../simscr/clean.scr
+m4 ../simscr/tb_merge.v.m4 | sed -e "s/_SSYSYMBOL_/\'/"  > tb.v
+m4 ../simscr/merge.v.m4 | sed -e "s/_SSYSYMBOL_/\'/"  > merge.v
+m4 ../simscr/encoderFlatInput.v.m4 | sed -e "s/_SSYSYMBOL_/\'/"  > encoderFlatInput.v
+#make CGFEC_RX_DECODER_wrap_noundriven.v
+#make expandedEncoder.v
+ncprep ../libhelp/filelist_merge.v
+ncvlog -f ncvlog.args  -64BIT 
+ncelab tb             -access +rwc  -NOSPECIFY -NOTIMINGCHECKS  -SNAPSHOT worklib.tb:v -TIMESCALE 1ns/1ps -64BIT
+ncsim  worklib.tb:v    -gui  -64BIT -input ../simscr/start_merge.tcl
+#ncsim  worklib.tb:v    -input ../simscr/start.tcl -gui  -64BIT 
+

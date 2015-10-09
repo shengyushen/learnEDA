@@ -1,0 +1,12 @@
+rm -rf INCA_libs waves.shm
+rm -f *.log *.args *.key cds.lib hdl.var RUN_NC
+rm -rf debussyLog sim.dump* vfastLog
+rm -rf FM_WORK*
+rm -rf fm_shell_* formality*
+rm -rf WORK
+rm -f *.db
+rm -f data_in            ENCODER_DATA_OUT    rx_data_in     tx_data_out
+rm -f data_in_s          ENCODER_DATA_OUT_s  rx_data_in_s   tx_data_out_s
+rm -f DECODER_DATA_IN          tx_data_66b
+rm -f DECODER_DATA_IN_s       tx_data_66b_s
+rm -f alllog

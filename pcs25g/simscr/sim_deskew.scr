@@ -1,0 +1,24 @@
+source ../simscr/clean.scr
+
+ncprep ../pcssrc/filelist.v \
+ +incdir+../std_ovl/vlog95 \
+ +incdir+../std_ovl  \
+ +incdir+../pcssrc/cgfecrtl  \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/asic_support_v005/verilog/beh      \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/hs15gb_v010/verilog/net_sim_only   \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/hs15gb_v010/verilog/wrappers       \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_12t_svt_v006/verilog/beh        \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_12t_uvt_v008/verilog/beh        \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_ti_rvt_v004/verilog/beh         \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/technologyfiles_v006/verilog/beh   \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/tvsense_v003/verilog/net_sim_only \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/plllibvreg_v001/verilog/beh					\
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/pllif_v002/verilog/beh							\
+ +libext+.vmd+.v+.vlib
+ 
+
+ncvlog -f ncvlog.args  -64BIT
+ncelab tb_deskew             -access +rwc  -NOSPECIFY -NOTIMINGCHECKS  -SNAPSHOT worklib.tb_deskew:v -TIMESCALE 1ns/1ps -64BIT
+ncsim  worklib.tb_deskew:v    -input ../simscr/start_deskew.tcl -gui  -64BIT 
+#ncsim  worklib.tb_deskew:v     -gui  -64BIT -input restore.tcl
+

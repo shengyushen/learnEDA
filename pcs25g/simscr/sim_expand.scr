@@ -1,0 +1,10 @@
+#!/bin/sh
+source ~/scr/cds_setting.scr
+source ../simscr/clean.scr
+m4 ../simscr/tb.v.m4 | sed -e "s/_SSYSYMBOL_/\'/"  > tb.v
+ncprep ../libhelp/filelist.v 
+ncvlog -f ncvlog.args  -64BIT 
+ncelab tb             -access +rwc  -NOSPECIFY -NOTIMINGCHECKS  -SNAPSHOT worklib.tb:v -TIMESCALE 1ns/1ps -64BIT
+ncsim  worklib.tb:v    -gui  -64BIT 
+#ncsim  worklib.tb:v    -input ../simscr/start.tcl -gui  -64BIT 
+

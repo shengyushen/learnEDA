@@ -1,0 +1,5 @@
+cat tx|awk '{if(NF==2 && $2=="!") print substr($1,2,length($1)-1)}'|awk '{len=length($1);padlen=64-len;for(i=1;i<=padlen;i=i+1) printf "0"; print $0}' > tx0
+cat rx|awk '{if(NF==2 && $2=="!") print substr($1,2,length($1)-1)}'|awk '{len=length($1);padlen=64-len;for(i=1;i<=padlen;i=i+1) printf "0"; print $0}' > rx0
+
+cat rx0 |awk '{printf $1}' > rx00
+

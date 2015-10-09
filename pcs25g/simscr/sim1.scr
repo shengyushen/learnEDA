@@ -1,0 +1,19 @@
+#!/bin/sh
+
+source ../simscr/clean.scr
+
+ncprep ../pcssrc/filelist_simflat.v \
+ +incdir+../std_ovl/vlog95 \
+ +incdir+../std_ovl  \
+ +incdir+../pcssrc/cgfecrtl  \
+ -y /1202prj/ibm_cu32hp/rel3.0/asic_support_9t_v008/verilog/beh      \
+ -y /1202prj/ibm_cu32hp/rel3.0/sc_9t_svt_v012/verilog/beh      \
+ -y /1202prj/ibm_cu32hp/rel3.0/sc_9t_hvt_v012/verilog/beh      \
+ -y /1202prj/ibm_cu32hp/rel3.0/sc_9t_uvt_v013/verilog/beh     \
+ -y /1202prj/ibm_cu32hp/rel3.0/asic_support_9t_v008/verilog/net_sim_only   \
+ -y /1202prj/ibm_cu32hp/rel3.0/technologyfiles_v004/verilog/beh   \
+ +libext+.vmd+.v+.vlib
+ 
+ncvlog -f ncvlog.args  -64BIT 
+ncelab tb             -access +rwc  -NOSPECIFY -NOTIMINGCHECKS  -SNAPSHOT worklib.tb:v -TIMESCALE 1ns/1ps -64BIT
+ncsim  worklib.tb:v    -input ../simscr/start.tcl -gui  -64BIT 

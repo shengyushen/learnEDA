@@ -1,0 +1,19 @@
+source ../simscr/clean.scr
+
+ncprep ../pcssrc/filelist.v \
+ +incdir+../std_ovl/vlog95    +incdir+../std_ovl  \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/asic_support_v004/verilog/beh      \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/hs15gb_v006/verilog/net_sim_only   \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/hs15gb_v006/verilog/wrappers       \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_12t_svt_v006/verilog/beh        \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_12t_uvt_v008/verilog/beh        \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_ti_rvt_v004/verilog/beh         \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/technologyfiles_v004/verilog/beh   \
+ -y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/technologyfiles_v005/verilog/beh   \
+ +libext+.vmd+.v+.vlib
+ 
+
+ncvlog -f ncvlog.args  -64BIT -DEFINE NO_DISSYNC
+ncelab tb             -access +rwc  -NOSPECIFY -NOTIMINGCHECKS  -SNAPSHOT worklib.tb:v -TIMESCALE 1ns/1ps -64BIT
+ncsim  worklib.tb:v   -input restore.tcl -input ../simscr/start.tcl -gui  -64BIT
+

@@ -1,0 +1,39 @@
+OK	1	skew
+OK	2	error injection
+OK	3	lane order
+OK	fec lane polar
+4	fec drop lane support
+OK	4.1	fec drop lane should trigger relock
+		when the lane lock lost, the external block lock and ready signal do not drop.
+		this is caused by passing lane lock signal through FIFO, when the lane lock lost, no data can be delivered to FIFO, so the lock==0 can not be pass through the fifo to deskewer, so the deskewer still think it is in all lane locked state, so the deskewer will not be reset, so it will make the restart_lock==1 forever, so no data can be recovered and pass to fifo, this is a dead lock
+OK	5	low latency
+6	application aware phy, transimiting without correcting some particular data type
+7	proving transparency or serial semantics
+8 verifying RS code
+OK	9	testing bypassing fec
+10	eee support
+OK	11	clock enabling signal for exclusively selecting pcs25g and cgfec
+OK	12 dropping of block lock should trigger re-establishing ready
+	SEE 4.1
+OK	13	reset all set to _n 
+14	using different AM on two connected chips to avoid crosstalk
+OK	15	filtering fake AM appear incidently
+but still a minor problem when a fake AM arrive just before the real AM, so there will be a false alignment
+OK	16	AEC AET
+17	observe the skew
+18	deepen the fifo to support larger skew
+
+some improvements on pcs25g that should be integrated to pcs15g
+1	lane id's reset value should be f, instead of 0, to prevent the latter from affecting the swizzler when the lane is actually dropped but still with block lock ==1
+NO 2	use generate to rewrite the pcs25g
+NO	cgfec also carry lane id in AM 3	sync should not carry block lock, because SYNC may be stalled and leads to dead lock
+5	protecting the control character of pcs25g with redundency or replication. inexact match similar to AM lock in cgfec. 
+01/10 border is also volumteer to 10-3 error rate, should we use AM ?
+01/10 is also hurted by 10-5 error rate
+may be we should improve the cgfec to shorten its latency
+OK	6	pcs with local reset
+OK	7	pcs with external provided local block lock and polar
+OK	8	clock progress register for observing pma clocks
+OK	9	output detected polar
+10	recording the lanes without getting SYNC
+
