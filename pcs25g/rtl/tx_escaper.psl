@@ -1,0 +1,10 @@
+vunit tx_escaper_psl (tx_escaper)
+{
+	default clock = posedge clk;
+
+
+	//no ideal -> no data enable
+	inst_assert_inp_enable_ideal : assume always   !out_ideal -> !in_txdata_en;
+	//no ideal -> no data enable
+	inst_assert_outp_enable_ideal :  assert always !in_ideal  -> !out_txdata_en;
+}

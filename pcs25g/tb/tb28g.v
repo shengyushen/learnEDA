@@ -75,7 +75,7 @@ end
 reg	hssreset_fast;
 initial 
 begin
-	hssreset_fast=0;
+	hssreset_fast=1;
 	#(200) hssreset_fast=1;
 	#(200) hssreset_fast=0;
 /*	#(2000) //wait for prtready
@@ -129,8 +129,8 @@ end
 reg	corereset;
 initial 
 begin
-	corereset=0;
-	#(9000) corereset=1;//wait for rxdclk ready
+	corereset=1;
+	#(900) corereset=1;//wait for rxdclk ready
 	#(200) corereset=0;
 end
 
@@ -138,9 +138,9 @@ reg	c32reset;
 reg div2reset;
 initial 
 begin
-	c32reset=0;
-	div2reset=0;
-	#(8000) c32reset=1;//wait for rxdclk ready
+	c32reset=1;
+	div2reset=1;
+	#(800) c32reset=1;//wait for rxdclk ready
 	#(200) c32reset=0;
 	#(400) div2reset=1;
 	#(200) div2reset=0;
@@ -176,7 +176,7 @@ end
 reg rst_ref_n;
 initial 
 begin
-	rst_ref_n=1'b1;
+	rst_ref_n=1'b0;
 	#100 rst_ref_n=1'b0;
 	#100 rst_ref_n=1'b1;
 end
@@ -189,7 +189,7 @@ end
 reg	hssreset_slow;
 initial 
 begin
-	hssreset_slow=0;
+	hssreset_slow=1;
 	#(200) hssreset_slow=1;
 	#(200) hssreset_slow=0;
 /*	#(2000)//we must wait for the prtready  

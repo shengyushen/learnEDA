@@ -1,0 +1,22 @@
+vunit tx_fifo_2x_psl (tx_fifo_2x)
+{
+	
+	inst_assert_0 : assert always (!idle_wr_tight -> !en_wr) @(posedge clk_wr);
+	
+	wire	almost_full                =(wrpointer>=rdpointer_gray_sync2_full)?
+		((wrpointer-rdpointer_gray_sync2_full)>(12-4)):
+		((rdpointer_gray_sync2_full-wrpointer)<4);
+	wire	almost_empty               =(wrpointer>=rdpointer_gray_sync2_full)?
+		((wrpointer-rdpointer_gray_sync2_full)<4):
+		((rdpointer_gray_sync2_full-wrpointer)>(12-4));
+	reg		almost_full_last;
+	always  @(posedge clk_wr or negedge reset_n_wr) begin
+		if(!reset_n_wr) begin
+			almost_full_last<=0;
+		end
+		else begin
+			almost_full_last<=almost_full;
+		end
+	end
+	inst_assert_1 : assert never (almost_full_last && almost_empty) @(posedge clk_wr);
+}

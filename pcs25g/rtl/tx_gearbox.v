@@ -237,11 +237,5 @@ end
 
 assign	out_data=data_reg[`UNITWIDTH_PMA-1:0];
 
-`ifdef PCS_SIM
-// data enable  ->  ideal
-assert_always #(`OVL_FATAL) inst_assert_inp_enable_ideal(clk,reset_n,!in_pop || out_ideal);
-//the pos is alway correct
-assert_always #(`OVL_FATAL) inst_assert_inp_position_correct(clk,reset_n,correct);
-`endif
 
 endmodule

@@ -1,3 +1,5 @@
+`timescale 1ns/10ps
+
 `ifndef PCS8X_DEFINE_H
 `define PCS8X_DEFINE_H
 

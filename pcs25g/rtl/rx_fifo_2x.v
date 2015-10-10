@@ -316,32 +316,5 @@ always  @(posedge clk_rd) begin
 	end
 end
 
-`ifdef PCS_SIM
-//eqaul means empty
-//canpop means there is a data in fifo
-wire	almost_full                   =(rdpointer_full>wrpointer_gray_sync2_full)?
-	((rdpointer_full-wrpointer_gray_sync2_full)<=3):
-	((wrpointer_gray_sync2_full-rdpointer_full)>=(16-3));
-reg		almost_full_last;
-always @(posedge clk_rd or negedge reset_n_rd) begin
-	if(!reset_n_rd) begin
-		almost_full_last<=0;
-	end
-	else begin
-		almost_full_last<=almost_full;
-	end
-end
-
-wire	almost_empty                   =(rdpointer_full>wrpointer_gray_sync2_full)?
-	((rdpointer_full-wrpointer_gray_sync2_full)>=(16-3)):
-	((wrpointer_gray_sync2_full-rdpointer_full)<=3);
-
-wire	overflow=almost_full_last&& almost_empty;
-
-assert_always #(`OVL_FATAL) inst_assert_0(clk_wr,reset_n_wr,!overflow);
-
-wire	not_expected_draw=almost_full_approximation & !pop_rd;
-
-`endif
 
 endmodule

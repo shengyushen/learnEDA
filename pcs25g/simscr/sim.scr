@@ -1,63 +1,21 @@
-#!/bin/sh
-source ~/scr/cds_setting.scr
-choice=`pwd|awk -F\/ '{print $NF}'`
-case $choice in
-sim_PCS25G_AUTO_BLKLCK_AUTO_PLOAR*) type=PCS25G_AUTO_BLKLCK_AUTO_PLOAR;;
-sim_PCS25G_MANUAL_BLKLCK_AUTO_POLAR*) type=PCS25G_MANUAL_BLKLCK_AUTO_POLAR;;
-sim_PCS25G_AUTO_BLKLCK_MANUAL_POLAR*) type=PCS25G_AUTO_BLKLCK_MANUAL_POLAR;;
-sim_FEC_FULL*) type=FEC_FULL;;
-sim_FEC_BYPASS*) type=FEC_BYPASS;;
-sim_FPGA*) type=FPGA;;
-sim_40G*) type=FOURTYG;;
-*) type=ALL;;
+#!/bin/bash
+
+if [[ $# -ne 1 ]] || [[ $1 != "g" && $1 != "ng" ]]
+then
+	echo "Usage : sim.scr <g|ng>"
+	echo "g means running gui, while ng means command line only"
+	echo $1
+	exit
+fi
+
+case $1 in
+"g" )
+	export guiOpt="-input ../simscr/gui.tcl -input ./restore.tcl -gui -access r" ;;
+"ng")
+	export guiOpt="-input ../simscr/nongui.tcl"
 esac
 
-echo $type
-
-source ../simscr/clean.scr
-
-ncprep ../pcssrc/filelist.v \
- +incdir+../std_ovl/vlog95 \
- +incdir+../std_ovl  \
- +incdir+../pcssrc/cgfecrtl  \
- -y ../dd/asic_support_9t_v008/verilog/beh      \
- -y ../dd/sc_9t_svt_v012/verilog/beh      \
- -y ../dd/sc_9t_hvt_v012/verilog/beh      \
- -y ../dd/sc_9t_uvt_v013/verilog/beh     \
- -y ../dd/asic_support_9t_v008/verilog/net_sim_only   \
- -y ../dd/technologyfiles_v004/verilog/beh   \
- +libext+.vmd+.v+.vlib
- 
-if [ $type == "ALL" ]
-then 
-  ncvlog -f ncvlog.args  -64BIT \
-	  -DEFINE PCS25G_AUTO_BLKLCK_AUTO_PLOAR \
-	  -DEFINE PCS25G_MANUAL_BLKLCK_AUTO_POLAR \
-	  -DEFINE PCS25G_AUTO_BLKLCK_MANUAL_POLAR \
-	  -DEFINE FEC_FULL \
-	  -DEFINE FEC_BYPASS
-elif [ $type == "FPGA" ]
-then
-  ncvlog -f ncvlog.args  -64BIT \
-	  -DEFINE FPGA \
-	  -DEFINE FPGA_IMPLEMENTATION \
-	  -DEFINE NOTUSE_LANE1 \
-	  -DEFINE NOTUSE_LANE2 \
-	  -DEFINE NOTUSE_LANE3
-else
-  ncvlog -f ncvlog.args  -64BIT -DEFINE $type
-fi
-ncelab tb             -access +rwc  -NOSPECIFY -NOTIMINGCHECKS  -SNAPSHOT worklib.tb:v -TIMESCALE 1ns/1ps -64BIT
-ncsim  worklib.tb:v    -input ../simscr/start.tcl -gui  -64BIT 
-#ncsim  worklib.tb:v    -input ../simscr/start_all.tcl -gui  -64BIT 
-#ncsim  worklib.tb:v     -gui  -64BIT -input restore.tcl
-
-
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/hs15gb_v010/verilog/net_sim_only \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/asic_support_v005/verilog/beh \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_12t_svt_v006/verilog/beh \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/technologyfiles_v006/verilog/beh \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_ti_rvt_v004/verilog/beh \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/sc_12t_uvt_v008/verilog/beh \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/asic_support_v005/verilog/wrappers \
- #-y /nio_nr/IBM_Cu45HP/simlib/ibm_cu45hp/rel4.0/asic_support_v005/verilog/net \
+irun -f ../simscr/pcs25g.f \
+	-top tb \
+	-assert \
+	$guiOpt

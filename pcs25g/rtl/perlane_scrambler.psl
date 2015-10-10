@@ -1,0 +1,8 @@
+vunit perlane_scrambler_psl (perlane_scrambler)
+{
+	default clock = posedge clk;
+
+
+	inst_assert_0 : assert always in_txdata_valid -> out_idle;
+	inst_assert_1 : assert always (out_txdata_valid_tmp==4'b0000||out_txdata_valid_tmp==4'b1111);
+}

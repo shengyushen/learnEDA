@@ -24,24 +24,5 @@ always @(*) begin
 	endcase
 end
 
-`ifdef PCS_SIM
-reg	[3:0]	last_outp;
-always @(posedge clk) begin
-	last_outp<=outp;
-end
-reg	correct;
-always @(*) begin
-	case(outp)
-	G0 : correct=(last_outp==outp || last_outp==G5);
-	G1 : correct=(last_outp==outp || last_outp==G0);
-	G2 : correct=(last_outp==outp || last_outp==G1);
-	G3 : correct=(last_outp==outp || last_outp==G2);
-	G4 : correct=(last_outp==outp || last_outp==G3);
-	default : correct=(last_outp==outp || last_outp==G4) && (inp==5);
-	endcase
-end
-
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,correct);
-`endif
 
 endmodule

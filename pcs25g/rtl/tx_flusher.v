@@ -118,9 +118,6 @@ always @(*) begin
 	endcase
 end
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,!out_txdata_valid | in_idle);
-`endif
 
 
 endmodule

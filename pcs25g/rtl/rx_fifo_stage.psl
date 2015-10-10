@@ -1,0 +1,17 @@
+vunit rx_fifo_stage_psl (rx_fifo_stage)
+{
+//assertion for pop_collector -> data_valid_collector
+//assert_always #(`OVL_FATAL) inst_assert_0(clock,reset_n,!pop_collector | data_valid_collector);
+//assertion for  data_valid_collector ->  pop_collector
+//assert_always #(`OVL_FATAL) inst_assert_1(clock,reset_n,!data_valid_collector | pop_collector);
+//assertion for  pop_collector ->  canpop_collector
+//assert_always #(`OVL_FATAL) inst_assert_2(clock,reset_n,!pop_collector | canpop_collector);
+
+//assertion for pop_fifo -> data_valid_fifo
+//assert_always #(`OVL_FATAL) inst_assert_3(clock,reset_n,!pop_fifo | data_valid_fifo);
+//assertion for  data_valid_fifo ->  pop_collector
+//assert_always #(`OVL_FATAL) inst_assert_4(clock,reset_n,!data_valid_fifo | pop_fifo);
+//assertion for  pop_fifo ->  canpop_fifo
+//assert_always #(`OVL_FATAL) inst_assert_5(clock,reset_n,!pop_fifo | canpop_fifo);
+	
+}

@@ -5,7 +5,6 @@ use warnings;
 print "Hello world\n";
 my $ssy = "haha";
 my $num = 12;
-)
 print $ssy;
 print "the num is $num\n";
 print "num*num is ", $num*$num, "\n";

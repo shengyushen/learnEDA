@@ -185,12 +185,5 @@ always @(*) begin
 	endcase
 end
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,!(!allidle & out_ideal));
-assert_always #(`OVL_FATAL) inst_assert_1(clk,reset_n,!(!in_ideal0 & out_txdata_en0));
-assert_always #(`OVL_FATAL) inst_assert_2(clk,reset_n,!(!in_ideal1 & out_txdata_en1));
-assert_always #(`OVL_FATAL) inst_assert_3(clk,reset_n,!(!in_ideal2 & out_txdata_en2));
-assert_always #(`OVL_FATAL) inst_assert_4(clk,reset_n,!(!in_ideal3 & out_txdata_en3));
-`endif
 
 endmodule 

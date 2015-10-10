@@ -36,22 +36,4 @@ always @(posedge clk)  begin
 	end
 end
 
-`ifdef PCS_SIM
-reg	[4:0]	outp1;
-always @(*) begin
-	case(inp)
-	5'd0: outp1=G0 ;
-	5'd1: outp1=G1 ;
-	5'd2: outp1=G2 ;
-	5'd3: outp1=G3 ;
-	5'd4: outp1=G4 ;
-	5'd5: outp1=G5 ;
-	5'd6: outp1=G6 ;
-	default: outp1=G7 ;
-	endcase
-end
-
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,(outp1==outp));
-`endif
-
 endmodule

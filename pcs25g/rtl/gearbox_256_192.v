@@ -167,12 +167,5 @@ gearbox_64_48 inst3(
 	.in_idle(in_idle)
 );
 assign	out_dataerror=out_dataerror_tmp[0]|bderror;
-`ifdef PCS_SIM
-//assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,(!in_datavalid|out_idle));
-assert_always #(`OVL_FATAL) inst_assert_1(clk,reset_n,(!out_datavalid|in_idle));
-assert_always #(`OVL_FATAL) inst_assert_2(clk,reset_n,(oidl==4'b0000||oidl==4'b1111));
-assert_always #(`OVL_FATAL) inst_assert_3(clk,reset_n,(odv==4'b0000||odv==4'b1111));
-assert_always #(`OVL_FATAL) inst_assert_4(clk,reset_n,(out_dataerror_tmp==4'b0000||out_dataerror_tmp==4'b1111));
-`endif
 
 endmodule

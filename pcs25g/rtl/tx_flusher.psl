@@ -1,0 +1,7 @@
+vunit tx_flusher_psl (tx_flusher)
+{
+	default clock = posedge clk;
+
+
+	inst_assert_0 : assume always out_txdata_valid -> in_idle;
+}

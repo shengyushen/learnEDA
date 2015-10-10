@@ -1,0 +1,7 @@
+vunit rx_block_sync_psl (rx_block_sync)
+{
+	default clock = posedge clk;
+
+
+	inst_assert_0 : assert always correct;
+}

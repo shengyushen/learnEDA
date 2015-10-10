@@ -1,0 +1,9 @@
+vunit tx_swizzler_psl (tx_swizzler)
+{
+	default clock = posedge clk;
+
+
+	//valid data incoming -> pos<=8+number of data
+	inst_assert_validdata_imply_enough_space : assume always in_txdata_valid -> (pos<=(8+numberOfdata));
+	inst_assert_2 : assert always (saved_blocklock_remote_pre!=0);
+}

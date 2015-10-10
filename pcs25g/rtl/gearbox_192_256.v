@@ -109,12 +109,5 @@ gb_border inst_gb_border256 (
 	.in_idle(in_idle)
 );
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,(!in_datavalid|out_idle));
-assert_always #(`OVL_FATAL) inst_assert_1(clk,reset_n,(!out_datavalid|in_idle));
-assert_always #(`OVL_FATAL) inst_assert_2(clk,reset_n,(oidl==4'b0000||oidl==4'b1111));
-assert_always #(`OVL_FATAL) inst_assert_3(clk,reset_n,(odv_tmp==4'b0000||odv_tmp==4'b1111));
-assert_always #(`OVL_FATAL) inst_assert_4(clk,reset_n,(es==4'b0000||es==4'b1111));
-`endif
 
 endmodule

@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 module tb;
 tb28g inst_tb28g_fec_corrected( 
-	.USE_PCS25G(1'b0),
+	.USE_PCS25G(1'b1),
 	.NO_DISSYNC(1'b0),
 	.INFER_POLAR(1'b1),.GIVEN_POLAR(4'b0000),
 	//fec config

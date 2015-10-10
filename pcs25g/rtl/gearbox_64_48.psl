@@ -1,0 +1,7 @@
+vunit gearbox_64_48_psl (gearbox_64_48)
+{
+	default clock = posedge clk;
+
+	inst_assert_0 : assert always in_datavalid -> out_idle;
+	inst_assert_1 : assume always out_datavalid -> in_idle;
+}

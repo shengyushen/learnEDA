@@ -1,0 +1,9 @@
+vunit gearbox_192_256_psl (gearbox_192_256)
+{
+	default clock = posedge clk;
+	inst_assert_0 : assert always in_datavalid -> out_idle;
+	inst_assert_1 : assume always out_datavalid -> in_idle;
+	inst_assert_2 : assert always oidl==4'b0000||oidl==4'b1111;
+	inst_assert_3 : assert always odv_tmp==4'b0000||odv_tmp==4'b1111;
+	inst_assert_4 : assert always es==4'b0000||es==4'b1111;
+}

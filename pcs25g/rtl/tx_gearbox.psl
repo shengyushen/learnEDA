@@ -1,0 +1,10 @@
+vunit tx_gearbox_psl (tx_gearbox)
+{
+	default clock = posedge clk;
+
+
+	// data enable  ->  ideal
+	inst_assert_inp_enable_ideal : assume always in_pop -> out_ideal;
+	//the pos is alway correct
+	inst_assert_inp_position_correct : assert always correct;
+}

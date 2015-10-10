@@ -118,7 +118,6 @@ data4_0[3:0]==4'b0000
 );
 
 
-
-assert_always #(`OVL_WARNING) inst_assert_0(clk,reset_n,(correct|error));
+//psl inst_assert_0 : assert always (reset_n -> (correct|error)) @ (posedge clk) severity warning;
 
 endmodule

@@ -11,8 +11,12 @@ input               rst_n;
 input [WIDTH-1:0]   din;
 output [WIDTH-1:0]  dout;
 
+reg  [WIDTH-1:0]  sync_dff0;
+reg  [WIDTH-1:0]  sync_dff1;
+
 
 wire [WIDTH-1:0]   dout;
+
 
 
 

@@ -542,7 +542,4 @@ wire correct = correct1;
 
 
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,correct);
-`endif
 endmodule

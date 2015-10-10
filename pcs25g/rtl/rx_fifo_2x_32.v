@@ -423,34 +423,5 @@ wire correct=idle_wr | !en_wr;
 
 
 
-`ifdef PCS_SIM
-//eqaul means empty
-//canpop means there is a data in fifo
-wire	almost_full                   =(rdpointer_full>wrpointer_gray_sync2_full)?
-	((rdpointer_full-wrpointer_gray_sync2_full)<=3):
-	((wrpointer_gray_sync2_full-rdpointer_full)>=(32-3));
-reg		almost_full_last;
-always @(posedge clk_rd or negedge reset_n_rd) begin
-	if(!reset_n_rd) begin
-		almost_full_last<=0;
-	end
-	else begin
-		almost_full_last<=almost_full;
-	end
-end
-
-wire	almost_empty                   =(rdpointer_full>wrpointer_gray_sync2_full)?
-	((rdpointer_full-wrpointer_gray_sync2_full)>=(32-3)):
-	((wrpointer_gray_sync2_full-rdpointer_full)<=3);
-
-wire	overflow=almost_full_last&& almost_empty;
-
-//when NO_DISSYNC is not defined, the dissync is enabled
-// which will discard old data by increase read pointer to prevent overflow
-// in this case, we can test this assertion
-// otherwise, the fifo is intentionally overflowed to discard old data
-assert_always #(`OVL_FATAL) inst_assert_0(clk_wr,reset_n_wr,!overflow);
-
-`endif
 
 endmodule

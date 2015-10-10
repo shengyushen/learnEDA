@@ -156,17 +156,5 @@ end
 assign out_txdata_en=data_en_current && in_ideal;
 assign out_txdata=data_current;
 
-`ifdef PCS_SIM
-//no ideal -> no data enable
-assert_always #(`OVL_FATAL) inst_assert_inp_enable_ideal(clk,reset_n,out_ideal || !in_txdata_en);
-//no ideal -> no data enable
-assert_always #(`OVL_FATAL) inst_assert_outp_enable_ideal(clk,reset_n,in_ideal || !out_txdata_en);
-//ideal -> data enable
-//this means that the sata stream will never been broken
-assert_always #(`OVL_FATAL) inst_assert_outp_non_stop(clk,reset_n,!in_ideal || out_txdata_en);
-// sync -> in_txdata_en
-// we are using a fifo so may not be this case
-//assert_always #(`OVL_FATAL) inst_assert_outp_sync_en(clk,reset_n,!in_txsync || in_txdata_en);
-`endif
 
 endmodule

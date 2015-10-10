@@ -1,0 +1,4 @@
+vunit ssyfifo_psl (ssyfifo)
+{
+	inst_assert_0 : assume always (out_full -> !in_datavalid) @(posedge clkw);
+}

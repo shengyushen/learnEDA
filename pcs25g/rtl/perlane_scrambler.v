@@ -78,9 +78,5 @@ scrambler_64 inst3 (
 
 assign	out_idle=in_idle;
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clk,reset_n,(!in_txdata_valid|out_idle));
-assert_always #(`OVL_FATAL) inst_assert_1(clk,reset_n,(out_txdata_valid_tmp==4'b0000||out_txdata_valid_tmp==4'b1111));
-`endif
 
 endmodule 

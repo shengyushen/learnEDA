@@ -1,0 +1,13 @@
+vunit distributor_psl (distributor)
+{
+  default clock = posedge clk;
+
+
+	inst_assert_0 : assert never (!allidle   && out_ideal);
+	inst_assert_1 : assert never (!in_ideal0 && out_txdata_en0);
+	inst_assert_2 : assert never (!in_ideal1 && out_txdata_en1);
+	inst_assert_3 : assert never (!in_ideal2 && out_txdata_en2);
+	inst_assert_4 : assert never (!in_ideal3 && out_txdata_en3);
+}
+
+

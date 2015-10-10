@@ -219,25 +219,5 @@ always @(*) begin
 	endcase
 end
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clk_wr,reset_n_wr,!(!idle_wr_tight & en_wr));
-
-wire	almost_full                =(wrpointer>=rdpointer_gray_sync2_full)?
-	((wrpointer-rdpointer_gray_sync2_full)>(12-4)):
-	((rdpointer_gray_sync2_full-wrpointer)<4);
-wire	almost_empty               =(wrpointer>=rdpointer_gray_sync2_full)?
-	((wrpointer-rdpointer_gray_sync2_full)<4):
-	((rdpointer_gray_sync2_full-wrpointer)>(12-4));
-reg		almost_full_last;
-always  @(posedge clk_wr or negedge reset_n_wr) begin
-	if(!reset_n_wr) begin
-		almost_full_last<=0;
-	end
-	else begin
-		almost_full_last<=almost_full;
-	end
-end
-assert_always #(`OVL_FATAL) inst_assert_1(clk_wr,reset_n_wr,!(almost_full_last && almost_empty));
-`endif
 
 endmodule

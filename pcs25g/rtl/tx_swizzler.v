@@ -231,11 +231,6 @@ always @(*) begin
 	end
 end
 
-`ifdef PCS_SIM
-//valid data incoming -> pos<=8+number of data
-assert_always #(`OVL_FATAL) inst_assert_validdata_imply_enough_space(clk,reset_n,!in_txdata_valid || (pos<=(8+numberOfdata)));
-assert_always #(`OVL_FATAL) inst_assert_2(clk,reset_n,saved_blocklock_remote_pre!=0);
-`endif
 
 
 endmodule

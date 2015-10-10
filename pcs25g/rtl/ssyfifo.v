@@ -150,9 +150,5 @@ end
 
 assign out_datavalid=in_idle && !empty;
 
-`ifdef PCS_SIM
-assert_always #(`OVL_FATAL) inst_assert_0(clkw,resetw_n,(!in_datavalid|!out_full));
-
-`endif
 
 endmodule
