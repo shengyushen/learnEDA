@@ -3,7 +3,14 @@ module tb;
 import uvm_pkg::* ;
 
 initial begin
-	$display ("ssy");
+	$display ("initializing");
+	// although I can call ssy_test with run_test directly
+	// this may need to recompile the testbench
+	//uvm_pkg::run_test("ssy_test");
+	//actually we should specify the testname ssy_test at the command line
+	// with +UVM_TESTNAME=ssy_test
+	// and simple calling run_test without arguments
+	uvm_pkg::run_test();
 end
 
 
@@ -15,7 +22,7 @@ class ssy_test extends uvm_test;
 		$display("ssy_test.new");
 	endfunction
 
-	virtual function build_phase ();
+	virtual function void build_phase ( uvm_phase phase);
 		super.build_phase(phase);
 		$display("ssy_test.build_phase");
 	endfunction
