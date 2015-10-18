@@ -1,15 +1,29 @@
 module t1 ;
 
-class 
 
 reg clk;
 initial begin
 	clk = 0;
-	forever begin
-		#10ns clk = !clk;
-		#100ms clk = !clk;
-	end
+	//forever begin
+		#10 clk = !clk;
+		#100 clk = !clk;
+		#10 clk = !clk;
+		#10 clk = !clk;
+		#10 clk = !clk;
+		#100 clk = !clk;
+		#100 clk = !clk;
+		#100 clk = !clk;
+	//end
 
 end
 
-endmodule : t1
+
+initial begin
+	forever begin
+		wait (clk==1);
+		$display("hah %d",$stime);
+		wait (clk==0);
+	end
+end
+
+endmodule 
