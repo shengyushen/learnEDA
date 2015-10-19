@@ -175,7 +175,7 @@ class ssy_monitor extends uvm_monitor;
 		cross12 : cross uo_1, uo_2 ;
 	endgroup : cov_1
 
-	covergroup cov_2 (ref bit [31:0] ruo ) ;
+	covergroup cov_2 (ref bit [31:0] ruo );
 		option.per_instance = 1;
 
 		uo_15_0 : coverpoint ruo[15:0] {
@@ -208,6 +208,7 @@ class ssy_monitor extends uvm_monitor;
 		super.new (name,parent);
 		cov_0 = new();
 		cov_1 = new(uuo,b3,b4,1);
+		cov_2 = new(uuo);
 		item_collected_port = new("item_collected_port",this);
 		inst_item = new();
 	endfunction : new
@@ -221,6 +222,10 @@ class ssy_monitor extends uvm_monitor;
 	virtual task run_phase(uvm_phase phase);
 	begin
 		@(posedge vif.sig_reset_n);
+		@(posedge vif.sig_clock);
+		@(posedge vif.sig_clock);
+		@(posedge vif.sig_clock);
+		@(posedge vif.sig_clock);
 		forever begin
 			@(posedge vif.sig_clock);
 			//this is collection data
@@ -230,6 +235,7 @@ class ssy_monitor extends uvm_monitor;
 			inst_item.ui = vif.uo ;
 			item_collected_port.write(inst_item);
 			check_0 : assert (uuo != 0 && uuo!=1);
+			cov_2.sample();//manually calling sample 
 			-> trans_event;
 		end
 	end
