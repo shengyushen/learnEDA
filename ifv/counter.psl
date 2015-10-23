@@ -1,0 +1,4 @@
+vunit counter_mod(counter)
+{
+	A3 : assert always (count_reg==3'b100) -> next eventually! (count_reg ==3'b101); 
+}
