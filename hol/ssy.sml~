@@ -1,0 +1,29 @@
+(*basic term*)
+val ssy = [1,2,3];
+val triple = (1,2,3);
+val first = #1 triple;
+val second = #2 triple;
+val third = #3 triple ;
+
+(*destructors*)
+val t1=``x/\y==>z``;
+val imp_pair = dest_imp t1;
+val conjt= ``x/\y``;
+val conj_pair = dest_conj conjt;
+
+(*logic type and ml expression type*)
+(*every xxx in ``xxx`` is a term*)
+``(1,2)``;
+type_of it;
+
+``(1,2,3)``;
+type_of it;
+
+(*but (``xx``,``xxx``) is a term*term*)
+val tt=(``1``,``2``);
+type_of (#1 tt);
+type_of (#2 tt);
+
+(*term constructor*)
+val x = mk_var("x",``:bool``)
+and y = mk_var()

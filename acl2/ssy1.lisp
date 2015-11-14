@@ -55,193 +55,177 @@
 )
 
 
-(defthm insert-sort-is-sort
-  (is-sorted (insert-sort x))
+;(defthm perm-sym-base
+;  (implies (and (consp x)
+;                (not (ismem (car x) y))
+;                )
+;           (not (perm y x))))
+
+
+; return the two list before a and after a
+(defun del-before-a (a x)
+  (cond ((endp x) nil)
+        ((equal a (car x))
+         nil)
+        (t (cons (car x) (del-before-a a (cdr x)))))
   )
 
-(defthm insert-sort-sub-is-sorted
-  (implies (is-sorted x)
-           (is-sorted (cdr x)))
-  )
-
-
-;; not proved yet
-(defthm cons-x-nil
-  (implies (not (consp y))
-           (equal (cons x y) x)
-           )
-  )
-
-
-(defthm one-car-equal-x
-  (IMPLIES (AND (CONSP X) (NOT (CONSP (CDR X))))
-           (EQUAL (LIST (CAR X)) X)
-           )
-  )
-
-
-
-(defthm insert-car-cdr-equal-x
-  (implies (and (is-sorted x)
-                (consp x))
-           (equal (insert (car x) (cdr x))
-                  x)
-           )
+(defun del-after-a (a x)
+  (cond ((endp x) nil)
+        ((equal a (car x))
+         (cdr x))
+        (t (del-after-a a (cdr x))))
   )
 
 
 
-
-
-
-
-
-(defthm sorted-insert-car-cdr-not-change
-  (implies (is-sorted x)
-           (equal (insert (car x)
-                          (cdr x)
-                          )
-                  x))
+(defun isallmem (x y)
+  (cond ((endp x) t)
+        ((ismem (car x) y) (isallmem (cdr x) (del (car x) y)))
+        (t nil)
+        )
   )
 
-
-(defthm sorted-equal
-  (implies (is-sorted x)
-           (equal (insert-sort x) x))
+(defun delset (x y)
+  (cond ((endp x) y)
+        (t (delset (cdr x) (del (car x) y)))
+        )
   )
 
-(defthm perm-sort-norm
-  (implies (and (is-sorted x)
-                (perm x y))
-           (perm x (insert-sort y))
-           )
-  )
-
-(defthm perm-insert-sort
-  (implies (perm x y)
-           (equal (insert-sort x) 
-                  (insert-sort y)))
-  )
-
-(defthm perm-cons
-  (implies (perm x y)
-           (perm (insert a x) (cons a y)))
+(defthm perm-bfy-in-xcdr
+  (implies (perm (append x y) z)
+           (isallmem x z))
   )
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+; uselful
 
-
-(defthm insert-sort-is-perm
-  (perm (insert-sort x) x)
-  )
-
-
-
-
-
-
-
-
-(defthm ismem-insert
-  (ismem a (insert a x))
-  )
-
-
-
-(defthm del-size 
+(defthm del-equal-before-after 
   (implies (ismem a x)
-           (< (acl2-count (del a x))
-              (acl2-count x))
+           (equal (del a x)
+                  (append (del-before-a a x) 
+                          (del-after-a a x)
+                          )
+                  )
            )
-)
-(defthm perm-notmem
-  (implies (and (consp x) (not (ismem (car x) y)))
-           (not (perm y x))
+  )
+
+(defthm perm-delset-bf-equal-cdr-x
+  (implies (isallmem bfy xcdr)
+           (equal (perm (append bfy afy) xcdr)
+                  (perm afy (delset bfy xcdr)))
            )
-)
+  )
 
 
-
-(defun perm2 (x y)
-  (cond ((endp x) (endp y))
-	(t ))
-)
+(defthm permxy-perm-cdr-xy
+  (implies (perm x y)
+           (perm (cdr x) 
+                 (del (car x) y))))
 
 (defthm perm-sym
-  (equal (perm x y) 
-	 (perm y x)
-	 )
-)
-
-(defthm perm-sort-self
-  (perm x (insert-sort x))
-  )
-
-(defthm per-sort-self-ind
-  (implies (AND (consp X)
-                (perm (CDR X) (INSERT-SORT (CDR X))))
-           (perm X
-                 (INSERT (CAR X) (INSERT-SORT (CDR X)))))
-)
-(defthm perm-sort
-  (implies (perm x y)
-         (equal (insert-sort x) 
-		(insert-sort y))
-         )
-)
-
-
-(defthm perm-trans
-  (implies (and (perm x y) 
-		(perm y z))
-           (perm x z)
-           )
-)
-
-(defthm perm-1
-  (implies (ismem a y)
-           (perm y (cons a (del a y)) )
-           )
-)
-
-
-
-
-
-
-
-
-
-
-
-(defthm perm-insert
-  (implies (consp x)
-           (perm (cons a x) 
-		 (cons (car x) 
-		       (cons a 
-			     (cdr x))))
-           )
-  )
-
-(defthm perm-sym-ind
-  (implies (and (perm (del (car x) y) 
-		      (cdr x)) 
-		(not (equal nil 
-			    (car x))))
+  (implies (perm x y) 
            (perm y x)
            )
-)
-(defthm perm-sym-ind1
-  (implies (and (perm (cdr x) 
-		      (del (car x) y) ) 
-		(ismem (car x) y) 
-		(not (equal nil 
-			    (car x))))
-           (perm x y)
+  )
+
+
+  
+(defthm perm-del
+  (implies (ismem  a y)
+           (equal (perm (del a y) x)
+                  (perm y (cons a x))))
+  ;; A hint is necessary.
+  :hints (("Goal" :induct (perm y x))))
+
+(defthm perm-symmetric
+  (implies (perm x y) (perm y x)))))
+
+(local
+ (encapsulate
+  ()
+
+  ;; We can imagine that the following rule would loop with perm-symmetric, so
+  ;; we make it local to this encapsulate.
+
+  (local
+   (defthm perm-del
+     (implies (ismem a y)
+              (equal (perm (del a y) x)
+                     (perm y (cons a x))))
+     ;; A hint is necessary.
+     :hints (("Goal" :induct (perm y x)))))
+
+  (defthm perm-symmetric
+    (implies (perm x y) (perm y x)))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+(defthm perm-delset-bf-equal-cdr-x
+  (implies (isallmem bfy xcdr)
+           (equal (perm (append bfy afy) xcdr)
+                  (perm afy (delset bfy xcdr)))
            )
-)
+  )
+
+(defthm perm-add-bf-equal
+  (implies (isallmem bf y)
+           (equal (perm x (delset bf y))
+                  (perm (append bf x) y)))
+  )
+
+(defthm car-x-del-equal-del-car-x
+  (implies (and (ismem b x)
+                (not (equal a b)))
+           (equal (cons a (del b x))
+                  (del b (cons a x))))
+  )
+
+(defthm car-x-delset-equal-delset-car-x
+  (implies (and (isallmem bf x)
+                (not (ismem a bf)))
+           (equal (cons a (delset bf x))
+                  (delset bf (cons a x))))
+  )
+
+(defthm append-bfa-a-afa-equal-y
+  (implies (and (consp y)
+                (ismem a y))
+           (equal (append (del-before-a a y) 
+                          (cons a
+                                (del-after-a a y))
+                          )
+                  y)
+           )
+  )
+
+
+(defthm not-ismem-carx-del-before-a
+  (not (ismem a (del-before-a a x))))
+
+;used only in proving perm-induct
+; need to be disable in perm-sym
+(defthm perm-add-head-equal
+  (equal (perm x y)
+         (perm (cons a x) (cons a y))))
 
 
 
+(defthm perm-induct
+  (IMPLIES (AND (CONSP X)
+                (ISMEM (CAR X) Y)
+                (PERM (APPEND (DEL-BEFORE-A (CAR X) Y)
+                              (DEL-AFTER-A (CAR X) Y))
+                      (CDR X))
+                (PERM (CDR X)
+                      (APPEND (DEL-BEFORE-A (CAR X) Y)
+                              (DEL-AFTER-A (CAR X) Y))))
+           (PERM Y X))
+  )
 
