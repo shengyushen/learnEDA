@@ -1,0 +1,1 @@
+euclidScript.uo: /home/syshen/hol-kananaskis-10/sigobj/HolKernel.ui /home/syshen/hol-kananaskis-10/sigobj/Parse.ui /home/syshen/hol-kananaskis-10/sigobj/arithmeticTheory.ui /home/syshen/hol-kananaskis-10/sigobj/boolLib.ui /home/syshen/hol-kananaskis-10/sigobj/bossLib.ui 

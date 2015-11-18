@@ -4,11 +4,14 @@ but we still refer to them with dot , such as xxTheory.xxfun
 
 but with open , we can directly refer to xxfuun
 *)
-
+open HolKernel boolLib Parse bossLib
 open arithmeticTheory;
 
+
+val _ =new_theory "euclid";
+
 val divides_def = Define `divides a b  = ? x . b = a * x `;
-set_fixity "divides" (Infix(NONASSOC,450));
+val _ = set_fixity "divides" (Infix(NONASSOC,450));
 val prime_def = Define `prime p = ~(p=1) /\ !x. x divides p ==> (x=1) \/ (x=p)`;
 
 (*proving DIVIDES_0*)
@@ -164,26 +167,6 @@ THEN RW_TAC arith_ss [NOT_PRIME_0]
 THEN RW_TAC arith_ss []
 );
 
-g `!n. ~(n=1) ==> ?p. prime p /\ p divides n`;
-(* 
-complete induction means we can use all the lower cases
-*)
-e (completeInduct_on `n`);
-e (RW_TAC arith_ss []);
-e (Cases_on `prime n`);
-  e (METIS_TAC [DIVIDES_REFL]);
-
-  e (`?x. x divides n /\ ~(x=1) /\ ~ (x=n)` by METIS_TAC[prime_def]);
-  e (`x<=n\/(n=0) ` by METIS_TAC[prime_def , DIVIDES_LE]);
-    e (`x<n` by RW_TAC arith_ss []);
-    e (`?p1. prime p1 /\ p1 divides x` by METIS_TAC []);
-    e (`prime p1 /\ (p1 divides n)` by METIS_TAC [DIVIDES_TRANS]);
-    e (METIS_TAC []);
-
-    e (RW_TAC arith_ss []);
-    e (`prime 2` by METIS_TAC [PRIME_2]);
-    e (EXISTS_TAC ``2``);
-    e (RW_TAC arith_ss [divides_def, prime_def]) ;
 
 val PRIME_FACTOR = store_thm (
 "PRIME_FACTOR",
@@ -332,3 +315,5 @@ THENL [
 
 
 
+
+val _ = export_theory ();
