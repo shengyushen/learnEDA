@@ -1,0 +1,8 @@
+00000001
+1111aaaa
+5555ffff
+ff0000ff
+7fff8000
+f9e8c91b
+fa5092a3
+b84e7da2

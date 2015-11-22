@@ -1,0 +1,99 @@
+#!/usr/bin/perl
+#
+# Converts Verilog netlists to HOL-style netlists
+#
+# Written by Steve Barrus
+#
+# Usage: ./holnetlist verilog_files
+#
+
+use Verilog::Netlist;
+
+die "Usage: $0 file\n" if ($#ARGV < 0);
+
+$netlist = new Verilog::Netlist();
+
+foreach $filename (@ARGV) {
+  $netlist->read_file(filename=>$filename);
+}
+
+$netlist->link();
+$netlist->lint();
+$netlist->exit_if_error();
+
+foreach $module ($netlist->top_modules_sorted) {
+  $modname = $module->name;
+  print "$modname(";
+
+  $comma = 0;
+  foreach $port ($module->ports_sorted) {
+    die "ERROR: encountered an undefined net\n" if (!$port->net);
+    $netname = $port->net->name;
+    $netwidth = $port->net->width;
+    if ($netwidth) {
+      for ($i = 0; $i < $netwidth; $i++) {
+        print "," if $comma;
+        $comma = 1;
+        print $netname . "_" . $i;
+      }
+    } else {
+      print "," if $comma;
+      $comma = 1;
+      print "$netname";
+    }
+  }
+  print ") = \n";
+
+  print "?";
+  $comma = 0;
+  foreach $net ($module->nets) {
+    $netname = $net->name;
+    $netwidth = $net->width;
+    if (!($module->find_port($netname))) {
+      if ($netwidth) {
+        for ($i = 0; $i < $netwidth; $i++) {
+          print " " if $comma;
+          $comma = 1;
+          print $netname . "_" . $i;
+        }
+      } else {
+        print " " if $comma;
+        $comma = 1;
+        print "$netname";
+      }
+    }
+  }
+  print ".\n";
+
+  foreach $cell ($module->cells) {
+    $cellname = $cell->name;
+    $submodname = $cell->submodname;
+    print " /\\ \n" if ($cell != ($module->cells)[0]);
+    print "$submodname(";
+
+    $comma = 0;
+    foreach $pin ($cell->pins_sorted) {
+      $pinname = $pin->name;
+      #die "ERROR: encountered an undefined net\n" if (!$pin->net);
+      if (!$pin->net) {
+        print " INCOMPLETE_NET ";
+        next;
+      }
+      $pinnet = $pin->net->name;
+      $pinwidth = $pin->net->width;
+      print "," if ($comma);
+      $comma = 1;
+      if ($pinwidth) {
+        for ($i = 0; $i < $pinwidth; $i++) {
+          print "," if $i != 0;
+          print $pinnet . "_" . $i;
+        }
+      } else {
+        print "$pinnet";
+      }
+    }
+    print ")";
+  }
+  print "\n";
+}
+
