@@ -1,0 +1,3 @@
+main.o: main.cpp ssyvector.h ssycontainer.h
+ssycontainer.o: ssycontainer.cpp ssycontainer.h ssyvector.h
+ssyvector.o: ssyvector.cpp ssyvector.h
