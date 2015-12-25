@@ -1,60 +1,70 @@
 #include <iostream>
 #include <vector>
 #include <assert.h>
-#include "ssyvector.h"
-
-//I can open two namespace at the same time
 using namespace std;
-using namespace Ssyvector;
 
-ssyvector operator+(const ssyvector& a,const ssyvector& b) {
-	assert(a.get_size() == b.get_size());
-	cout<<"+\n"<<flush;
-	size_t sz=a.get_size();
-
-	ssyvector res(sz);
-	for(size_t i = 0;i<sz;i++) {
-		res[i]=a[i]+b[i];
+template <typename T> class ssyvector{
+private :
+	size_t size;
+	T* ptr;
+public :
+	ssyvector(size_t sz) {
+		assert (sz>=0);
+		size=sz;
+		ptr=new T[sz];
 	}
-	return res;
-}
 
-ssyvector ret_ssyv() {
-	ssyvector sv(21);
-		for(size_t i = 0 ; i<21;i++) {
-			sv[i]=i;
+	~ssyvector() {
+		size=0;
+		delete ptr;
+	}
+
+	T& operator[](size_t i) {
+		return ptr[i];
+	}
+
+	void print() {
+		for(size_t i =0;i<size;i++) {
+			cout << ptr[i]<<" ";
 		}
-	return sv;
+		cout<<"\n"<<flush;
+	}
+
+	size_t get_size() {
+		return size;
+	}
+//these two types of operator for begin and end are all OK
+	T* begin() {
+		return &(ptr[0]);
+	}
+	
+	T* end() {
+		return begin()+get_size();
+	}
+};
+/*
+template<typename T>
+T* begin(ssyvector<T>&x) {
+	return &(x[0]);
 }
 
-int main()
-{
-	size_t sz=5;
-	ssyvector s10000 (sz);
-	for(size_t i=0;i<sz;i++) {
-		s10000[i]=(double)i;
+template<typename T>
+T* end(ssyvector<T>&x) {
+	return begin(x)+x.get_size();
+}
+*/
+int main() {
+	ssyvector<double> sv(3);
+	sv[0]=2;
+	sv[1]=1;
+	sv[2]=0;
+	cout<<"output with print\n"<<flush;
+	sv.print();
+
+	cout<<"output with for-range\n"<<flush;
+	for(auto& t:sv) {
+		cout<<t<<" "<<flush;
 	}
-	ssyvector a10000{s10000};
-
-	ssyvector c10000 (sz);
-	cout<<"begin +\n"<<flush;
-	c10000 = s10000+a10000 + s10000;
-	c10000.print();
-
-	cout<<"begin even more copy\n"<<flush;
-	ssyvector d10000{c10000};
-	ssyvector e10000=d10000;
-
-	cout<<"move constructor in std::move and return\n"<<flush;
-	//ssyvector f10000= std::move(d10000);
-	//I may not see these move or copy constructor called
-	//this is due to the common copy elission optimization in
-	//most commercial compiler, that remove unnesscery copy or move
-	ssyvector sdf(ret_ssyv());
-	ssyvector sdf1 =ret_ssyv();
-	cout<<"before print\n"<<flush;
-	sdf.print();
-
 	return 0;
 }
 

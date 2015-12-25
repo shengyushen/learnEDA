@@ -11,7 +11,13 @@ int main()
 {
 	std::cout<<"hello world\n"<<flush;
 
-	int i=1;
+	int i(10);
+	cout<<i<<endl;
+	int i11{11};
+	cout<<i11<<endl;
+	int i12={12};
+	cout<<i12<<endl;
+
 	// init with {} is only in C++11
 	int i2 {1};
 	double d1 {1.7};
