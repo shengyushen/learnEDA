@@ -47,6 +47,9 @@ int main()
 
 	cout<<"move constructor in std::move and return\n"<<flush;
 	//ssyvector f10000= std::move(d10000);
+	//I may not see these move or copy constructor called
+	//this is due to the common copy elission optimization in
+	//most commercial compiler, that remove unnesscery copy or move
 	ssyvector sdf(ret_ssyv());
 	ssyvector sdf1 =ret_ssyv();
 	cout<<"before print\n"<<flush;
