@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include<string>
 
 using namespace std;
 
@@ -81,6 +82,7 @@ int main()
 	if(pc==nullptr) {
 		cout<<"pc is nullptr\n"<<flush;
 	}
+
 
 	return 0;
 }
