@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <tuple>
+#include <memory>
 #include <boost/variant.hpp>
 using namespace std;
 // 1. simple variant
@@ -12,7 +13,7 @@ typedef tuple<int> T_exp_number;
 typedef tuple<int, int> T_exp_add;
 typedef boost::variant< T_exp_number , T_exp_add > vartype;
 class vartype_visitor : public boost::static_visitor<void> {
-public :
+public:
 	void operator()(T_exp_number t1) const { cout<<"T_exp_number "<< get<0>(t1) <<endl; }
 	void operator()(T_exp_add    t1) const { cout<<"T_exp_add    "<< get<0>(t1) << " " << get<1>(t1) <<endl; }
 };
@@ -23,23 +24,36 @@ typedef tuple<int> T_xxx;
 
 // 4. we will use an diffrent head type in each tuple to distinguished the current type
 // I also show how to use recursive_wrapper without forward declaration
-struct recursiveOp_st;
-typedef struct recursiveOp_st recursiveOp;
-typedef struct {} T_exp_number_ht1;
-typedef tuple<T_exp_number_ht1 ,  boost::recursive_wrapper<recursiveOp > > T_exp_number1;
 
-typedef struct {} T_exp_number_ht2;
-typedef tuple<T_exp_number_ht2 , int> T_exp_number2;
+class x1;
+class x2;
+typedef class x1 x1;
+typedef class x2 x2;
 
-typedef boost::variant< T_exp_number1 , T_exp_number2 > vartype1;
-struct recursiveOp_st {int sdf;} ;
-
-
-class vartype_visitor1 : public boost::static_visitor<void> {
-public :
-	void operator()(T_exp_number1 t1) const { cout<<"T_exp_number1 "<< get<1>(t1).sdf <<endl; }
-	void operator()(T_exp_number2 t1) const { cout<<"T_exp_number2 "<< get<1>(t1) <<endl; }
+typedef boost::variant<shared_ptr<x1> , shared_ptr<x2>> bv;
+class x1 {
+public:
+	int d;
+	x1(int i) : d(i) {}
 };
+
+class x2 {
+public:
+	double d;
+	x2(double i): d(i) {}
+};
+
+class bv_visitor : public boost::static_visitor<void> {
+public:
+	void operator()(shared_ptr<x1> px1) const { cout<<"px1 "<< px1->d <<endl; }
+	void operator()(shared_ptr<x2> px2) const { cout<<"px2 "<< px2->d <<endl; }
+};
+
+shared_ptr<x1> px1 () {
+	shared_ptr<x1> px1=make_shared<x1>(111111);
+	cout<<"px1 use_count "<<(px1.use_count())<<endl;
+	return px1;
+}
 
 int main() {
 // 1. simple variant
@@ -61,17 +75,14 @@ int main() {
 	boost::apply_visitor( vartype_visitor() , vt_xxx);
 
 // 4. we will use an diffrent head type in each tuple to distinguished the current type
-	T_exp_number_ht1 ht1;
-	recursiveOp rc;
-	rc.sdf=22;
-	T_exp_number1 n1(ht1,rc);
-	vartype1 vtn1(n1);
-	T_exp_number_ht2 ht2;
-	T_exp_number2 n2(ht2,2);
-	vartype1 vtn2(n2);
-	boost::apply_visitor( vartype_visitor1() , vtn1);
-	boost::apply_visitor( vartype_visitor1() , vtn2);
-
+	auto px=px1();
+	shared_ptr<x2> px2=make_shared<x2>(1.11111);
+	auto px11=px;
+	cout<<"px11 use_count "<<px11.use_count()<<endl;
+	bv bv1(px11);
+	bv bv2(px2);
+	boost::apply_visitor( bv_visitor() , bv1);
+	boost::apply_visitor( bv_visitor() , bv2);
 	return 0;
 }
 
