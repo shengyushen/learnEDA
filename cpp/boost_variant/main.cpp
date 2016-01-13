@@ -4,6 +4,7 @@
 #include <tuple>
 #include <memory>
 #include <boost/variant.hpp>
+#include<typeinfo>
 using namespace std;
 // 1. simple variant
 typedef boost::variant<int, string> sdf;
@@ -83,6 +84,11 @@ int main() {
 	bv bv2(px2);
 	boost::apply_visitor( bv_visitor() , bv1);
 	boost::apply_visitor( bv_visitor() , bv2);
+
+	int x=1;
+	double d=1.1;
+	string str="xx";
+	cout<<typeid(px1).name()<<endl;
 	return 0;
 }
 
