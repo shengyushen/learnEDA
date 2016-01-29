@@ -28,6 +28,8 @@ inner * inner_inst;
 	void g() {inner_inst->f();cout<<"g non const\n"<<flush;}
 };
 
+int add1(const int & x) {return x+1;}
+
 int main()
 {
 	cout<<"non const instance both\n"<<flush;
@@ -53,6 +55,11 @@ int main()
 	outer_ptr * const outer_ptr_inst_const3 = new outer_ptr();
 	outer_ptr_inst_const3->g();
 	
+
+	//const int
+	const int xxxx=1 ;
+	const int iconst=add1(xxxx);
+
 	return 0;
 }
 
