@@ -139,3 +139,70 @@ print que.popleft()
 print que.popleft()
 print que
 
+print """
+working on filter
+"""
+def f(x): return (x%3)==0
+print filter (f,range(1,4))
+
+def sq(x) : return x*x
+print map(sq,range(1,4))
+
+def add(x,y): return x +y
+print map (add , range(1,4), range(2,5))
+
+print reduce (add,range(1,4))
+print range(10)
+
+print """
+list comprehension
+"""
+print [x**2 for x in range(10)]
+print [(x,y) for x in [1,2,3] for y in [2,3,4] if x!=y]
+
+print """
+working on set
+"""
+basket = ["apple","orange","apple"]
+fruits = set(basket)
+print fruits
+
+a = set ("ababc")
+b = set ("acde")
+print a
+print a-b
+
+print """
+working on looping 
+"""
+for i,v in enumerate (["apple","orange","apple"]):
+	print i,v
+
+question = ["who","where","when"]
+answer = ["ssy","nanning","1975"]
+for q,a in zip(question,answer):	
+	print q,a
+
+for i in reversed(xrange(1,10,2)):
+	print i
+
+for i in sorted (set(basket)):
+	print i
+
+knights = {"gallahad":"pure","robin":"brave"}
+for i,k in knights.iteritems():
+	print i,k
+
+print """
+working on string or
+"""
+str1,str2,str3="1","2",'3'
+strall=str1 or str2 or str3
+print strall
+
+print """
+working on module
+"""
+
+import mod
+print mod.ssyinc(1)
