@@ -206,3 +206,16 @@ working on module
 
 import mod
 print mod.ssyinc(1)
+
+print """
+working on class
+"""
+
+class ssy:
+	iii=0
+	def __init__ (self,i) :
+		self.iii = i
+
+x=ssy(1)
+print x.iii
+
