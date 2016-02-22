@@ -1,0 +1,1 @@
+bool isOne(string s) ;
