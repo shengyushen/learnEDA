@@ -17,6 +17,7 @@ void fval  (  string    str) { cout << str<<endl; }
 struct F {
 	string str;
 	F(const string & st) :str{st} {}
+	//this operator () is for thread usage
 	void operator()() {
 		cout << str <<endl;
 	}
