@@ -1,0 +1,5 @@
+main_cpp = ['main.cpp']
+other_cpp =['other.cpp']
+Program('main',main_cpp+other_cpp)
+
+

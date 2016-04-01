@@ -1,0 +1,3 @@
+irun t2.sv -input start.tcl -access +rw  -memdetail -sv
+#irun t2.sv -input start.tcl -access +rw  +gui
+#irun t2.sv -input start.tcl -access +rw -input restore.tcl
