@@ -1,19 +1,17 @@
-#include <iostream>
 #include <errno.h> /* Declares errno and defines error constants */
 #include <sys/types.h> /* Type definitions used by many programs */
 #include <string.h> /* Commonly used string-handling functions */
 #include <unistd.h> /* Prototypes for many system calls */
+#include <stdio.h>
 
-using namespace std;
+extern char ** environ ;
 
-int main() {
-	auto fn = "non_exist";
-	auto fd = fopen(fn,"r");
-	if(fd == NULL) {
-		perror("perror : ");
-		auto errstr = strerror(errno);
-		cout<<"strerror : " << errstr <<endl;
-	}
+int main(int argc , char ** argv) {
+//	while(p!=NULL) {
+//		printf("%s\n",p);
+		puts(*environ);
+//		p++;
+//	}
 	return 0;
 }
 

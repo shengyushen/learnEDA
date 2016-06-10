@@ -1,7 +1,7 @@
 // compile with
-//   agcc.sh hello.c
+//   ../scr/agcc.sh hello.c
 // run with
-//   se.sh a.out
+//   ../scr/se.sh a.out
 // all *.sh are in ../scr
 
 #include <stdio.h>

@@ -1,5 +1,19 @@
-main_cpp = ['main.cpp']
+# library file
+Library('prt2','prt2.cpp')
+# the same is
+# StaticLibrary('prt2','prt2.cpp')
+# to generate .so with the following
+# SharedLibrary('prt2','prt2.cpp')
+
+
+# program source file list
+# main_cpp = ['main.cpp']
+main_o = Object('main.cpp', CXXFLAGS = '-O3')
 other_cpp =['other.cpp']
-Program('main',main_cpp+other_cpp)
+Program('main',main_o+other_cpp, LIBS=['prt2'] , LIBPATH=['.'])
+
+env=Environment(CCFLAGS='-DXX')
+print 'CCCOM is' ,env['CCCOM']
+print 'CCCOM2 is' ,env.subst('$CCCOM')
 
 

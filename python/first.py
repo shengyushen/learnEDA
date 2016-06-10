@@ -219,3 +219,11 @@ class ssy:
 x=ssy(1)
 print x.iii
 
+print """
+working on any iterable function
+"""
+aa=['a','b']
+bb=['aa','cc']
+for b in bb:
+	if(any(b.startswith(prefix) for prefix in aa)):
+		print b
