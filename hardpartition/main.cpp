@@ -2,11 +2,13 @@
 #include <list>
 #include <iostream>
 #include <map>
+#include <unordered_set>
 #include <assert.h>
 using namespace std;
 
 
 map<int,list<list<int>>> size2partlist;
+list<list<int>> alreadyIn;
 
 bool isvalid(int i) {
 	if(i % 2) return false;
@@ -53,15 +55,46 @@ bool isInvalidPartition(list<int> il) {
 	return false;
 }
 
+
+bool findAlready(list<int> il) {
+	for(auto il2 : alreadyIn) {
+		if(il2.size()== il.size() && il2==il) {
+			//cout<<endl<<"comment il2 : ";
+			//for(auto i : il2) {cout << " " << i;}
+			//cout<<endl<<"comment il : ";
+			//for(auto i : il) {cout << " " << i;}
+			//cout<<endl;
+			return true;
+		}
+	}
+	return false;
+}
+
 int main(int argc,char**argv) {
 	size2partlist={ {0,{}} ,  {2,{{2}} } };
 	hardpart(32);
 
 	for(const auto pair : size2partlist) {
 		cout<<"FOR "<<pair.first <<endl; 
-		for(auto il : pair.second) {
+		auto ill=pair.second;
+		ill.sort(greater<list<int>>());
+		for(auto il : ill) {
+			list<int> il2=il;
+			il2.sort();
 			for(auto i : il) {cout <<i<<" ";}
 			if(isInvalidPartition(il)) {cout << " deleted ";}
+			else if(findAlready(il2)) { 
+				//it is duplicated
+				cout<<" duplicated ";
+			} else {
+				//inserting into alreadyIn
+			//cout<<endl<<"inserting sorted il2 : ";
+			//for(auto i : il2) {cout << " " << i;}
+			//cout<<endl<<"inserting original il : ";
+			//for(auto i : il) {cout << " " << i;}
+			//cout<<endl;
+				alreadyIn.push_back(il2);
+			}
 			cout<<endl;
 		}
 	}
